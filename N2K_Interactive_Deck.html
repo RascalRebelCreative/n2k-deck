@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Need to Know — Procurement Sustainability Intelligence</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F8F8F6;color:#1A1A1A;font-size:14px;line-height:1.5;}
+a{color:inherit;text-decoration:none;}
+
+/* ── TOP NAV ── */
+#topnav{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid #E0DED8;display:flex;align-items:center;padding:0 24px;height:52px;gap:4px;}
+.brand{font-size:15px;font-weight:600;color:#0F6E56;margin-right:20px;white-space:nowrap;}
+.brand span{color:#1A1A1A;font-weight:400;}
+.nav-btn{padding:6px 14px;border-radius:6px;border:none;background:transparent;color:#666;font-size:13px;cursor:pointer;font-weight:500;transition:all .15s;white-space:nowrap;}
+.nav-btn:hover{background:#F1EFE8;color:#1A1A1A;}
+.nav-btn.on{background:#E1F5EE;color:#085041;}
+.nav-sep{width:1px;height:20px;background:#E0DED8;margin:0 8px;flex-shrink:0;}
+
+/* ── SECTIONS ── */
+.section{display:none;min-height:calc(100vh - 52px);padding:32px 24px;}
+.section.on{display:block;}
+.section-inner{max-width:1100px;margin:0 auto;}
+
+/* ── SECTION HEADER ── */
+.s-header{margin-bottom:28px;}
+.s-num{font-size:11px;font-weight:600;color:#0F6E56;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+.s-title{font-size:26px;font-weight:600;color:#1A1A1A;margin-bottom:6px;}
+.s-sub{font-size:14px;color:#666;max-width:700px;line-height:1.6;}
+.s-divider{border:none;border-top:1px solid #E0DED8;margin:20px 0;}
+
+/* ── UTILITY ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.card{background:white;border:1px solid #E0DED8;border-radius:10px;padding:16px 18px;}
+.label{font-size:10px;font-weight:600;color:#0F6E56;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
+.insight{background:#E1F5EE;border-radius:8px;padding:12px 16px;margin-top:12px;}
+.insight p{font-size:13px;color:#085041;line-height:1.5;}
+.warn{background:#FAECE7;border-radius:8px;padding:12px 16px;margin-top:12px;}
+.warn p{font-size:13px;color:#712B13;line-height:1.5;}
+.amber{background:#FAEEDA;border-radius:8px;padding:12px 16px;margin-top:12px;}
+.amber p{font-size:13px;color:#633806;line-height:1.5;}
+.badge{font-size:10px;padding:2px 8px;border-radius:3px;font-weight:600;display:inline-block;}
+.mc{background:#F8F8F6;border-radius:8px;padding:12px 14px;}
+.mc .ml{font-size:11px;color:#666;margin-bottom:3px;}
+.mc .mv{font-size:20px;font-weight:600;color:#1A1A1A;}
+.mc .ms{font-size:11px;color:#999;margin-top:2px;}
+.prog-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.prog-label{font-size:12px;color:#1A1A1A;width:150px;flex-shrink:0;}
+.prog-wrap{flex:1;height:7px;background:#F1EFE8;border-radius:4px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:4px;}
+.prog-val{font-size:12px;color:#666;width:80px;text-align:right;flex-shrink:0;}
+
+/* ── SUB-NAV (within sections) ── */
+.sub-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.sub-btn{padding:6px 12px;border-radius:6px;border:1px solid #E0DED8;background:white;color:#666;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s;}
+.sub-btn:hover{border-color:#1D9E75;color:#1A1A1A;}
+.sub-btn.on{background:#E1F5EE;border-color:#0F6E56;color:#085041;}
+.sub-panel{display:none;}.sub-panel.on{display:block;}
+
+/* ── MILESTONE ROWS ── */
+.ms-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #F1EFE8;font-size:13px;}
+.ms-row:last-child{border-bottom:none;}
+.lever-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid #F1EFE8;}
+.lever-row:last-child{border-bottom:none;}
+.lever-text{font-size:13px;color:#1A1A1A;flex:1;line-height:1.4;}
+.lever-when{font-size:11px;color:#999;margin-top:2px;}
+
+/* ── TRIGGER BOX ── */
+.trig{border-left:3px solid #D85A30;padding:10px 14px;background:#FAECE7;border-radius:0 6px 6px 0;margin-bottom:10px;}
+.trig-head{font-size:12px;font-weight:600;color:#D85A30;margin-bottom:4px;}
+.trig-body{font-size:13px;color:#712B13;line-height:1.5;}
+
+/* ── CLAUSE BOX ── */
+.clause-box{background:#F8F8F6;border-left:3px solid #1D9E75;border-radius:0 6px 6px 0;padding:10px 14px;margin-bottom:8px;}
+.clause-label{font-size:10px;font-weight:600;color:#0F6E56;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em;}
+.clause-text{font-size:13px;color:#444;line-height:1.6;font-style:italic;}
+.clause-rationale{font-size:11px;color:#999;margin-top:6px;padding-top:6px;border-top:1px solid #E0DED8;}
+
+/* ── INITIATIVE CARDS ── */
+.init-card{border:1px solid #E0DED8;border-radius:8px;padding:12px;background:white;}
+.init-icon{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;margin-bottom:6px;}
+.init-name{font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:4px;}
+.init-status{font-size:12px;color:#666;line-height:1.4;margin-bottom:6px;}
+
+/* ── QUADRANT ── */
+.quad-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.quad-cell{padding:10px;border-radius:6px;font-size:12px;font-weight:600;text-align:center;line-height:1.3;}
+
+/* ── BENCHMARK BAR ── */
+.bench-outer{position:relative;margin:24px 0 12px;}
+.bench-bar{height:24px;border-radius:6px;overflow:hidden;position:relative;}
+.bench-supplier-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;border:2.5px solid white;}
+
+/* ── ACTIONS ── */
+.action-item{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid #F1EFE8;}
+.action-item:last-child{border-bottom:none;}
+.action-num{width:22px;height:22px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;margin-top:1px;}
+.action-text{font-size:13px;color:#1A1A1A;flex:1;line-height:1.4;}
+.action-due{font-size:11px;color:#999;margin-top:2px;}
+
+/* ── NTS RING ── */
+.nts-ring{width:68px;height:68px;border-radius:50%;border:3px solid;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.nts-val{font-size:24px;font-weight:700;line-height:1;}
+.nts-lbl{font-size:9px;color:#999;margin-top:1px;}
+
+/* ── SUPPLIER CARD ── */
+.s-header-card{display:flex;align-items:flex-start;gap:16px;padding:18px;background:white;border-radius:12px;margin-bottom:16px;border:1px solid #E0DED8;}
+.supplier-init{width:52px;height:52px;border-radius:10px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#085041;flex-shrink:0;}
+
+/* ── STEP TIMELINE ── */
+.step-row{display:flex;gap:0;align-items:stretch;}
+.step-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:11px;}
+.step-line{width:1px;flex:1;background:#E0DED8;margin:3px 0;}
+.step-content{flex:1;padding:8px 0 8px 14px;border-bottom:1px solid #F1EFE8;}
+
+/* ── TIER CARDS ── */
+.tier-card{border-radius:10px;padding:14px 16px;border:1px solid;}
+.tier-row{font-size:12px;line-height:1.6;padding:5px 0;border-bottom:1px solid;}
+.tier-row:last-child{border-bottom:none;}
+
+/* ── TABLES ── */
+table{border-collapse:collapse;width:100%;font-size:12px;}
+th{text-align:left;padding:8px 10px;border-bottom:2px solid #E0DED8;color:#666;font-weight:600;}
+td{padding:7px 10px;border-bottom:1px solid #F1EFE8;vertical-align:top;}
+tr:nth-child(even) td{background:#FAFAF8;}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div id="topnav">
+  <div class="brand">Need to <span>Know</span></div>
+  <div class="nav-sep"></div>
+  <button class="nav-btn on" onclick="showSection('s-overview',this)">Overview</button>
+  <button class="nav-btn" onclick="showSection('s-define',this)">01 Define</button>
+  <button class="nav-btn" onclick="showSection('s-discover',this)">02 Discover</button>
+  <button class="nav-btn" onclick="showSection('s-negotiate',this)">03 Negotiate</button>
+  <button class="nav-btn" onclick="showSection('s-spm',this)">04 SPM</button>
+  <button class="nav-btn" onclick="showSection('s-supplier',this)">Supplier view</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- OVERVIEW -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section on" id="s-overview">
+<div class="section-inner">
+  <div class="s-header">
+    <div class="s-num">Need to Know</div>
+    <div class="s-title">Procurement sustainability intelligence</div>
+    <div class="s-sub">Built by procurement, for procurement. Deal-ready insights at every stage of the commercial process — using the data you already have.</div>
+  </div>
+
+  <div id="ov-stages" style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;"></div>
+  <div id="ov-detail" class="card" style="min-height:160px;"></div>
+
+  <div class="insight" style="margin-top:16px;">
+    <p>N2K integrates the data you already have — SBTi, CDP, TPI, spend analytics. We do not duplicate existing investments. We make them commercially useful at every stage of the procurement process.</p>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- DEFINE -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section" id="s-define">
+<div class="section-inner">
+  <div class="s-header">
+    <div class="s-num">Stage 01</div>
+    <div class="s-title">Define</div>
+    <div class="s-sub">Set the standard before you go to market. What good looks like, why, and what you are going to do about it.</div>
+  </div>
+
+  <div class="sub-nav">
+    <button class="sub-btn on" onclick="subNav('def',0,this)">Carbon benchmark</button>
+    <button class="sub-btn" onclick="subNav('def',1,this)">Pathway decision</button>
+    <button class="sub-btn" onclick="subNav('def',2,this)">Specification clauses</button>
+    <button class="sub-btn" onclick="subNav('def',3,this)">Certification clauses</button>
+  </div>
+
+  <div class="sub-panel on" id="def-0">
+    <div class="label">Carbon intensity — professional services (tCO2e per FTE)</div>
+    <div style="margin-bottom:8px;display:flex;gap:16px;font-size:12px;color:#999;">
+      <span>Best in class: <strong style="color:#1D9E75;">0.5</strong></span>
+      <span>Good threshold: <strong style="color:#0F6E56;">4.5</strong></span>
+      <span>Sector average: <strong>6.2</strong></span>
+      <span>Worst: <strong style="color:#D85A30;">18</strong></span>
+    </div>
+    <div class="bench-outer">
+      <div class="bench-bar">
+        <div style="position:absolute;left:0;width:25%;height:100%;background:#FAECE7;"></div>
+        <div style="position:absolute;left:25%;width:30%;height:100%;background:#FAEEDA;"></div>
+        <div style="position:absolute;left:55%;width:38%;height:100%;background:#E1F5EE;"></div>
+        <div style="position:absolute;left:93%;width:7%;height:100%;background:#085041;"></div>
+        <!-- Good threshold marker -->
+        <div style="position:absolute;left:55%;top:0;width:2px;height:100%;background:#0F6E56;z-index:2;"></div>
+      </div>
+      <!-- Supplier dots -->
+      <div style="position:absolute;left:10%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;">
+        <div style="width:14px;height:14px;border-radius:50%;background:#D85A30;border:2px solid white;"></div>
+        <div style="font-size:10px;color:#D85A30;margin-top:4px;white-space:nowrap;">Legacy 13.4</div>
+      </div>
+      <div style="position:absolute;left:30%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;">
+        <div style="width:14px;height:14px;border-radius:50%;background:#D85A30;border:2px solid white;"></div>
+        <div style="font-size:10px;color:#D85A30;margin-top:4px;white-space:nowrap;">Strata 9.2</div>
+      </div>
+      <div style="position:absolute;left:42%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;">
+        <div style="width:14px;height:14px;border-radius:50%;background:#EF9F27;border:2px solid white;"></div>
+        <div style="font-size:10px;color:#EF9F27;margin-top:4px;white-space:nowrap;">Meridian 5.8</div>
+      </div>
+      <div style="position:absolute;left:65%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;">
+        <div style="width:14px;height:14px;border-radius:50%;background:#1D9E75;border:2px solid white;"></div>
+        <div style="font-size:10px;color:#1D9E75;margin-top:4px;white-space:nowrap;">BrightPath 3.7</div>
+      </div>
+      <div style="position:absolute;left:88%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;">
+        <div style="width:14px;height:14px;border-radius:50%;background:#1D9E75;border:2px solid white;"></div>
+        <div style="font-size:10px;color:#1D9E75;margin-top:4px;white-space:nowrap;">Apex 1.8</div>
+      </div>
+      <div style="position:absolute;left:55%;top:-22px;transform:translateX(-50%);font-size:10px;background:#0F6E56;color:white;padding:1px 6px;border-radius:3px;white-space:nowrap;font-weight:600;">Good: 4.5</div>
+    </div>
+    <div style="height:40px;"></div>
+    <div class="label" style="margin-top:8px;">Why the gap exists</div>
+    <div class="grid2">
+      <div class="card"><div style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:4px;">Business travel frequency</div><div style="font-size:12px;color:#666;line-height:1.5;">Air travel is typically the largest single carbon driver in professional services — often 60–80% of total Scope 1+2. Remote-first policy is the most powerful lever.</div></div>
+      <div class="card"><div style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:4px;">Office energy source</div><div style="font-size:12px;color:#666;line-height:1.5;">Suppliers with 100% renewable office energy (REGO-verified) show 15–25% lower intensity. Easily achievable — low cost, widely available.</div></div>
+      <div class="card"><div style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:4px;">Remote working policy</div><div style="font-size:12px;color:#666;line-height:1.5;">Shifting from opt-in remote to opt-in on-site materially changes emissions. The default matters as much as the policy ceiling.</div></div>
+      <div class="card"><div style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:4px;">Data centre intensity</div><div style="font-size:12px;color:#666;line-height:1.5;">Tech-heavy professional services firms with significant cloud/data infrastructure see this as a growing Scope 3 exposure. Relevant for IT consulting.</div></div>
+    </div>
+    <div class="insight"><p>Data sources used: existing spend analytics, CDP supply chain pull (2024), SBTi targets database, TPI assessments. No new supplier questionnaires required.</p></div>
+  </div>
+
+  <div class="sub-panel" id="def-1">
+    <div class="label">Pathway decision — which lever closes the gap?</div>
+    <p style="font-size:13px;color:#666;margin-bottom:16px;line-height:1.6;">Once you understand the carbon range and why the gap exists, the benchmark tells you which lever to apply. Not all pathways will be relevant — the right combination depends on your influence over the category and the supplier's starting position.</p>
+    <div class="grid2">
+      <div class="card" style="border-color:#1D9E75;border-width:1.5px;">
+        <div style="font-size:11px;font-weight:600;color:#0F6E56;margin-bottom:4px;">Selected pathway</div>
+        <div style="font-size:14px;font-weight:600;color:#1A1A1A;margin-bottom:6px;">Specification</div>
+        <div style="font-size:12px;color:#666;line-height:1.5;">Require local team resourcing, rail-first travel policy, remote-first delivery model. Addresses the largest carbon drivers at source before contract award.</div>
+      </div>
+      <div class="card" style="border-color:#1D9E75;border-width:1.5px;">
+        <div style="font-size:11px;font-weight:600;color:#0F6E56;margin-bottom:4px;">Selected pathway</div>
+        <div style="font-size:14px;font-weight:600;color:#1A1A1A;margin-bottom:6px;">Commercial engagement</div>
+        <div style="font-size:12px;color:#666;line-height:1.5;">NTS-linked price adjustment, milestone payments on SBTi and RE certification. Creates financial logic for the supplier to transition.</div>
+      </div>
+      <div class="card" style="border-color:#1D9E75;border-width:1.5px;">
+        <div style="font-size:11px;font-weight:600;color:#0F6E56;margin-bottom:4px;">Selected pathway</div>
+        <div style="font-size:14px;font-weight:600;color:#1A1A1A;margin-bottom:6px;">Performance management</div>
+        <div style="font-size:12px;color:#666;line-height:1.5;">Quarterly travel carbon KPIs, annual benchmarking rights, remediation obligations. The accountability layer that makes the other pathways enforceable.</div>
+      </div>
+      <div class="card" style="opacity:0.6;">
+        <div style="font-size:11px;font-weight:600;color:#999;margin-bottom:4px;">Not primary lever</div>
+        <div style="font-size:14px;font-weight:600;color:#1A1A1A;margin-bottom:6px;">Certification</div>
+        <div style="font-size:12px;color:#666;line-height:1.5;">ISO 14001 and CDP disclosure requested as preferred — not hard mandatory. Low headwinds sector means certification is achievable; use as a trajectory marker, not a gate.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-panel" id="def-2">
+    <div class="label">Specification clauses — professional services</div>
+    <div id="spec-clauses"></div>
+  </div>
+
+  <div class="sub-panel" id="def-3">
+    <div class="label">Certification clauses — professional services</div>
+    <div id="cert-clauses"></div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- DISCOVER -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section" id="s-discover">
+<div class="section-inner">
+  <div class="s-header">
+    <div class="s-num">Stage 02</div>
+    <div class="s-title">Discover</div>
+    <div class="s-sub">Know your supply base — who is ready, who is at risk, and why. Not a league table — a diagnostic.</div>
+  </div>
+
+  <div class="sub-nav">
+    <button class="sub-btn on" onclick="subNav('dis',0,this)">Supplier landscape</button>
+    <button class="sub-btn" onclick="subNav('dis',1,this)">Priority score</button>
+    <button class="sub-btn" onclick="subNav('dis',2,this)">Substitution signals</button>
+    <button class="sub-btn" onclick="subNav('dis',3,this)">Impact × proximity</button>
+  </div>
+
+  <div class="sub-panel on" id="dis-0">
+    <div class="grid4" id="sup-cards"></div>
+    <div class="label">NTS component breakdown</div>
+    <div id="nts-breakdown"></div>
+    <div class="insight"><p>The NTS scores supplier transition readiness — not current performance. A supplier with high ambition and low progress is a different commercial problem to one with no targets at all. The component breakdown is the diagnosis that determines which lever to apply.</p></div>
+  </div>
+
+  <div class="sub-panel" id="dis-1">
+    <div class="label">Priority Score = NTS × log(emissions volume)</div>
+    <p style="font-size:13px;color:#666;margin-bottom:16px;line-height:1.6;">You cannot engage every supplier. The Priority Score surfaces where category manager time has the highest combined commercial and carbon leverage. Log transformation prevents a single large supplier from collapsing the ranking.</p>
+    <div style="position:relative;width:100%;height:300px;margin-bottom:12px;"><canvas id="ps-chart"></canvas></div>
+    <div id="ps-legend" style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#666;margin-bottom:16px;"></div>
+    <div id="engage-seq"></div>
+    <div class="insight"><p>Priority #1 is Meridian Consulting — not the largest supplier (Apex) and not the worst NTS (Legacy). It is the combination of meaningful emissions volume and a NTS gap that is commercially addressable. That is where effort has the highest leverage.</p></div>
+  </div>
+
+  <div class="sub-panel" id="dis-2">
+    <div class="label">Substitution matrix — readiness vs procurement influence</div>
+    <svg id="sub-svg" width="100%" viewBox="0 0 640 380" style="margin-bottom:12px;"></svg>
+    <div class="label">Decision framework</div>
+    <div id="sub-table"></div>
+    <div class="insight"><p>Substitution pressure changes in-life dynamics. A supplier who knows alternatives exist and are being benchmarked engages differently with performance conversations than one who assumes incumbency is guaranteed.</p></div>
+  </div>
+
+  <div class="sub-panel" id="dis-3">
+    <div class="label">Impact × proximity — lever selection</div>
+    <svg id="ip-svg" width="100%" viewBox="0 0 640 400" style="margin-bottom:12px;"></svg>
+    <div class="label">Applied to professional services</div>
+    <div id="ip-examples"></div>
+    <div class="insight"><p>Lever mismatch is the most common failure mode in procurement sustainability. High impact, low proximity problems are not solved by KPIs alone. The model prevents applying the wrong tool.</p></div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- NEGOTIATE -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section" id="s-negotiate">
+<div class="section-inner">
+  <div class="s-header">
+    <div class="s-num">Stage 03</div>
+    <div class="s-title">Negotiate</div>
+    <div class="s-sub">Build sustainability into the deal structure — not as an add-on, but as the commercial architecture. The pathway chosen at Define determines which levers apply here.</div>
+  </div>
+
+  <div class="sub-nav">
+    <button class="sub-btn on" onclick="subNav('neg',0,this)">NTS quadrant logic</button>
+    <button class="sub-btn" onclick="subNav('neg',1,this)">Lever library</button>
+    <button class="sub-btn" onclick="subNav('neg',2,this)">Deal builder</button>
+    <button class="sub-btn" onclick="subNav('neg',3,this)">Commercial clauses</button>
+  </div>
+
+  <div class="sub-panel on" id="neg-0">
+    <div class="label">Click a quadrant to see deal structure implications</div>
+    <svg id="quad-svg" width="100%" viewBox="0 0 640 380" style="cursor:pointer;margin-bottom:12px;"></svg>
+    <div id="quad-detail" style="display:none;"></div>
+    <div class="insight" id="quad-hint"><p>Each quadrant implies a fundamentally different commercial relationship — not just a different level of accountability, but a different kind of conversation with the supplier.</p></div>
+  </div>
+
+  <div class="sub-panel" id="neg-1">
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;" id="lever-filter-btns"></div>
+    <div id="lever-lib"></div>
+  </div>
+
+  <div class="sub-panel" id="neg-2">
+    <div class="grid2" style="margin-bottom:16px;">
+      <div>
+        <div class="label">Supplier NTS tier</div>
+        <div style="display:flex;gap:6px;">
+          <button class="sub-btn" id="db-high" onclick="setDBTier('high',this)">High (70+)</button>
+          <button class="sub-btn on" id="db-mid" onclick="setDBTier('mid',this)">Mid (45–69)</button>
+          <button class="sub-btn" id="db-low" onclick="setDBTier('low',this)">Low (under 45)</button>
+        </div>
+      </div>
+      <div>
+        <div class="label">Primary pathway</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="sub-btn on" id="db-comm" onclick="setDBPath('commercial',this)">Commercial</button>
+          <button class="sub-btn" id="db-spec" onclick="setDBPath('specification',this)">Specification</button>
+          <button class="sub-btn" id="db-perf" onclick="setDBPath('performance',this)">Performance</button>
+        </div>
+      </div>
+    </div>
+    <div id="deal-output"></div>
+  </div>
+
+  <div class="sub-panel" id="neg-3">
+    <div class="label">Meridian Consulting — key clause language</div>
+    <div id="neg-clauses"></div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SPM -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section" id="s-spm">
+<div class="section-inner">
+  <div class="s-header">
+    <div class="s-num">Stage 04</div>
+    <div class="s-title">Supplier Performance Management</div>
+    <div class="s-sub">Track, trigger, and act — without starting from scratch. Two lenses: the individual contract and the category landscape.</div>
+  </div>
+
+  <div class="sub-nav">
+    <button class="sub-btn on" onclick="subNav('spm',0,this)">Contract tracking</button>
+    <button class="sub-btn" onclick="subNav('spm',1,this)">Category landscape</button>
+    <button class="sub-btn" onclick="subNav('spm',2,this)">In-life levers</button>
+    <button class="sub-btn" onclick="subNav('spm',3,this)">Data loop</button>
+  </div>
+
+  <div class="sub-panel on" id="spm-0">
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#FAEEDA;border-radius:8px;margin-bottom:16px;border:1px solid #FAC775;">
+      <span style="font-size:13px;font-weight:600;color:#633806;">Meridian Consulting — 18 months in · Cure period active</span>
+      <span class="badge" style="background:#FAECE7;color:#712B13;margin-left:auto;">Trigger fired</span>
+    </div>
+    <div class="grid4">
+      <div class="mc"><div class="ml">NTS at signing</div><div class="mv">58</div><div class="ms">Mid tier · Baseline</div></div>
+      <div class="mc"><div class="ml">NTS now</div><div class="mv" style="color:#EF9F27;">63</div><div class="ms">Yr 1 target: 63 ✓</div></div>
+      <div class="mc"><div class="ml">Year 2 target</div><div class="mv">68</div><div class="ms">At risk without RE fix</div></div>
+      <div class="mc"><div class="ml">Carbon intensity</div><div class="mv">5.8</div><div class="ms">tCO2e/FTE</div></div>
+    </div>
+    <div class="label">Component movement — signed vs now</div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="prog-row"><div class="prog-label">Ambition</div><div class="prog-wrap"><div class="prog-fill" style="width:78%;background:#1D9E75;"></div></div><div class="prog-val">72 → <span style="color:#1D9E75;font-weight:600;">78</span> <span style="font-size:10px;color:#1D9E75;">+6</span></div></div>
+      <div class="prog-row"><div class="prog-label">Progress</div><div class="prog-wrap"><div class="prog-fill" style="width:52%;background:#D85A30;"></div></div><div class="prog-val">48 → <span style="color:#D85A30;font-weight:600;">52</span> <span style="font-size:10px;color:#D85A30;">lagging ▼</span></div></div>
+      <div class="prog-row"><div class="prog-label">Context</div><div class="prog-wrap"><div class="prog-fill" style="width:58%;background:#B4B2A9;"></div></div><div class="prog-val">58 → <span style="font-weight:600;">58</span> <span style="font-size:10px;color:#999;">stable</span></div></div>
+      <div class="prog-row"><div class="prog-label">Renewable energy</div><div class="prog-wrap"><div class="prog-fill" style="width:48%;background:#D85A30;"></div></div><div class="prog-val">45 → <span style="color:#D85A30;font-weight:600;">48</span> <span style="font-size:10px;color:#D85A30;">primary gap ▼</span></div></div>
+      <div class="prog-row"><div class="prog-label">Actionability</div><div class="prog-wrap"><div class="prog-fill" style="width:67%;background:#1D9E75;"></div></div><div class="prog-val">62 → <span style="color:#1D9E75;font-weight:600;">67</span> <span style="font-size:10px;color:#1D9E75;">+5</span></div></div>
+      <div style="font-size:11px;color:#999;margin-top:8px;">Ambition up (SBTi submitted). Actionability up (management quality). Progress and RE lagging — both driven by air travel and office energy.</div>
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="label">Milestone tracker</div>
+        <div class="card">
+          <div class="ms-row"><span class="badge" style="background:#E1F5EE;color:#085041;min-width:48px;text-align:center;">Met</span><span style="flex:1;">NTS year 1 target (63)</span><span style="font-size:11px;color:#999;">Month 18</span></div>
+          <div class="ms-row"><span class="badge" style="background:#FAECE7;color:#712B13;min-width:48px;text-align:center;">Missed</span><span style="flex:1;">Air travel −60% by month 18</span><span style="font-size:11px;color:#D85A30;font-weight:600;">Trigger</span></div>
+          <div class="ms-row"><span class="badge" style="background:#FAECE7;color:#712B13;min-width:48px;text-align:center;">Missed</span><span style="flex:1;">100% renewable office energy</span><span style="font-size:11px;color:#999;">65% only</span></div>
+          <div class="ms-row"><span class="badge" style="background:#FAECE7;color:#712B13;min-width:48px;text-align:center;">Missed</span><span style="flex:1;">ISO 14001 certification</span><span style="font-size:11px;color:#D85A30;font-weight:600;">Overdue</span></div>
+          <div class="ms-row"><span class="badge" style="background:#E1F5EE;color:#085041;min-width:48px;text-align:center;">Met</span><span style="flex:1;">SBTi near-term submission</span><span style="font-size:11px;color:#999;">Month 11</span></div>
+          <div class="ms-row"><span class="badge" style="background:#FAEEDA;color:#633806;min-width:48px;text-align:center;">Partial</span><span style="flex:1;">CDP full disclosure</span><span style="font-size:11px;color:#999;">Band C only</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="label">Active trigger</div>
+        <div class="trig" style="margin-bottom:10px;">
+          <div class="trig-head">Air travel milestone missed — 17 Mar 2026</div>
+          <div class="trig-body">40% reduction achieved vs 60% target. 90-day cure period active. Remediation plan due 16 April 2026. ISO 14001 also overdue — compound breach risk.</div>
+        </div>
+        <div class="label">Escalation pathway</div>
+        <div class="card">
+          <div class="step-row"><div style="display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0;"><div class="step-dot" style="background:#D85A30;"></div><div class="step-line"></div></div><div class="step-content"><div style="font-size:11px;font-weight:600;color:#D85A30;">Now — Active</div><div style="font-size:13px;color:#1A1A1A;margin-top:2px;">Remediation plan demanded</div></div></div>
+          <div class="step-row"><div style="display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0;"><div class="step-dot" style="background:#EF9F27;"></div><div class="step-line"></div></div><div class="step-content"><div style="font-size:11px;font-weight:600;color:#EF9F27;">Day 30</div><div style="font-size:13px;color:#1A1A1A;margin-top:2px;">Plan reviewed or challenged</div></div></div>
+          <div class="step-row"><div style="display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0;"><div class="step-dot" style="background:#EF9F27;"></div><div class="step-line"></div></div><div class="step-content"><div style="font-size:11px;font-weight:600;color:#EF9F27;">Day 90</div><div style="font-size:13px;color:#1A1A1A;margin-top:2px;">Return to trajectory verified</div></div></div>
+          <div class="step-row"><div style="display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0;"><div class="step-dot" style="background:#888;"></div></div><div class="step-content" style="border:none;"><div style="font-size:11px;font-weight:600;color:#888;">If unresolved</div><div style="font-size:13px;color:#1A1A1A;margin-top:2px;">Termination notice — NTS floor 48</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-panel" id="spm-1">
+    <div class="label">NTS movement — all suppliers, month 0 vs month 18</div>
+    <div style="position:relative;width:100%;height:260px;margin-bottom:12px;"><canvas id="spm-cat-chart"></canvas></div>
+    <div id="spm-cat-leg" style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:#666;margin-bottom:16px;"></div>
+    <div class="label">Carbon intensity — tCO2e/FTE, movement since signing</div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="prog-row"><div class="prog-label">Apex Advisory</div><div class="prog-wrap"><div class="prog-fill" style="width:10%;background:#1D9E75;"></div></div><div class="prog-val">2.1 → <span style="color:#1D9E75;font-weight:600;">1.8</span> <span style="font-size:10px;color:#1D9E75;">▼14%</span></div></div>
+      <div class="prog-row"><div class="prog-label">BrightPath</div><div class="prog-wrap"><div class="prog-fill" style="width:21%;background:#1D9E75;"></div></div><div class="prog-val">4.1 → <span style="color:#1D9E75;font-weight:600;">3.7</span> <span style="font-size:10px;color:#1D9E75;">▼10%</span></div></div>
+      <div class="prog-row"><div class="prog-label">Meridian Consulting</div><div class="prog-wrap"><div class="prog-fill" style="width:32%;background:#EF9F27;"></div></div><div class="prog-val">6.8 → <span style="color:#EF9F27;font-weight:600;">5.8</span> <span style="font-size:10px;color:#EF9F27;">▼15%</span></div></div>
+      <div class="prog-row"><div class="prog-label">Strata Partners</div><div class="prog-wrap"><div class="prog-fill" style="width:49%;background:#D85A30;"></div></div><div class="prog-val">9.2 → <span style="color:#D85A30;font-weight:600;">8.9</span> <span style="font-size:10px;color:#D85A30;">▼3%</span></div></div>
+      <div class="prog-row"><div class="prog-label">Legacy Consulting</div><div class="prog-wrap"><div class="prog-fill" style="width:74%;background:#D85A30;"></div></div><div class="prog-val">13.5 → <span style="color:#D85A30;font-weight:600;">13.4</span> <span style="font-size:10px;color:#D85A30;">▼1%</span></div></div>
+      <div style="font-size:11px;color:#999;margin-top:6px;">Good threshold: 4.5 tCO2e/FTE. BrightPath is closing on it. Legacy Consulting essentially flat — substitution case materially stronger at month 18 than at signing.</div>
+    </div>
+    <div class="grid2">
+      <div class="card"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">The Meridian conversation — with the lens</div><div style="font-size:12px;color:#666;line-height:1.5;">"You met your NTS target — but you are improving at the category average rate. BrightPath is closing on the good threshold. You are not pulling ahead."</div></div>
+      <div class="card"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">The Legacy conversation — with the lens</div><div style="font-size:12px;color:#666;line-height:1.5;">"The category has moved. Your CI is essentially flat. The substitution case is now evidenced by the market — not just by our internal assessment."</div></div>
+    </div>
+  </div>
+
+  <div class="sub-panel" id="spm-2">
+    <p style="font-size:13px;color:#666;margin-bottom:16px;line-height:1.6;">What can the category manager actually do within the current contract, without renegotiation? These tools were agreed at Negotiate and are available now.</p>
+    <div class="label">Commercial levers</div>
+    <div id="spm-levers-comm"></div>
+    <div class="label" style="margin-top:16px;">Performance levers</div>
+    <div id="spm-levers-perf"></div>
+    <div class="insight"><p>None of these levers require renegotiation. The category manager is executing a contract — not improvising a response. This is the value of building the lever library into the deal at Negotiate.</p></div>
+  </div>
+
+  <div class="sub-panel" id="spm-3">
+    <p style="font-size:13px;color:#666;margin-bottom:16px;line-height:1.6;">Three data flows keep the NTS current — each replacing estimates with verified figures and changing the commercial dynamic as the relationship matures.</p>
+    <div id="data-loop"></div>
+    <div class="grid3" style="margin-top:16px;">
+      <div class="card"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Accuracy improves over time</div><div style="font-size:12px;color:#666;line-height:1.5;">Each connected source replaces an estimate with a verified figure. The NTS becomes more defensible as the relationship matures.</div></div>
+      <div class="card"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Connection is commercially rational</div><div style="font-size:12px;color:#666;line-height:1.5;">If better data improves NTS — and NTS drives price and volume — data quality becomes a supplier incentive, not a burden.</div></div>
+      <div class="card"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">Live data signals maturity</div><div style="font-size:12px;color:#666;line-height:1.5;">A supplier with a live expense API is a different risk profile to one submitting an annual return. Reflected in the Actionability component.</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SUPPLIER VIEW -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section" id="s-supplier">
+<div class="section-inner">
+  <div class="s-header">
+    <div class="s-num">Supplier battle card</div>
+    <div class="s-title">Meridian Consulting</div>
+    <div class="s-sub">Everything the category manager needs before walking into a supplier conversation — on one page.</div>
+  </div>
+
+  <!-- Supplier header -->
+  <div class="s-header-card">
+    <div class="supplier-init">MC</div>
+    <div>
+      <div style="font-size:18px;font-weight:700;color:#1A1A1A;">Meridian Consulting</div>
+      <div style="font-size:13px;color:#666;margin-top:3px;">Professional services · Management consulting · Contract year 2 of 3</div>
+      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+        <span class="badge" style="background:#FAEEDA;color:#633806;">Mid NTS · Coasting quadrant</span>
+        <span class="badge" style="background:#FAECE7;color:#712B13;">Cure period active</span>
+        <span class="badge" style="background:#E6F1FB;color:#0C447C;">SBTi submitted</span>
+        <span class="badge" style="background:#E1F5EE;color:#085041;">CDP Band C</span>
+        <span class="badge" style="background:#FAECE7;color:#712B13;">ISO 14001 overdue</span>
+      </div>
+    </div>
+    <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <div class="nts-ring" style="border-color:#EF9F27;">
+        <div class="nts-val" style="color:#EF9F27;">63</div>
+        <div class="nts-lbl">NTS</div>
+      </div>
+      <div style="font-size:11px;color:#999;">Was 58 · Target 68</div>
+    </div>
+  </div>
+
+  <!-- Metrics -->
+  <div class="grid4" style="margin-bottom:16px;">
+    <div class="mc"><div class="ml">Annual spend</div><div class="mv">£2.1m</div><div class="ms">Priority #2 supplier</div></div>
+    <div class="mc"><div class="ml">Carbon intensity</div><div class="mv">5.8</div><div class="ms">tCO2e/FTE · Target 4.5</div></div>
+    <div class="mc"><div class="ml">Travel emissions</div><div class="mv">68t</div><div class="ms">CO2e YTD · Above trajectory</div></div>
+    <div class="mc"><div class="ml">Priority score</div><div class="mv">287</div><div class="ms">NTS × log(emissions)</div></div>
+  </div>
+
+  <!-- NTS components + benchmark -->
+  <div class="grid2" style="margin-bottom:16px;">
+    <div class="card">
+      <div class="label">NTS components</div>
+      <div class="prog-row"><div class="prog-label">Ambition</div><div class="prog-wrap"><div class="prog-fill" style="width:78%;background:#1D9E75;"></div></div><div class="prog-val"><span style="color:#1D9E75;font-weight:600;">78</span> <span style="font-size:10px;color:#1D9E75;">+6</span></div></div>
+      <div class="prog-row"><div class="prog-label">Progress</div><div class="prog-wrap"><div class="prog-fill" style="width:52%;background:#D85A30;"></div></div><div class="prog-val"><span style="color:#D85A30;font-weight:600;">52</span> <span style="font-size:10px;color:#D85A30;">+4 ▼</span></div></div>
+      <div class="prog-row"><div class="prog-label">Context</div><div class="prog-wrap"><div class="prog-fill" style="width:58%;background:#B4B2A9;"></div></div><div class="prog-val"><span style="font-weight:600;">58</span> <span style="font-size:10px;color:#999;">—</span></div></div>
+      <div class="prog-row"><div class="prog-label">Renewable energy</div><div class="prog-wrap"><div class="prog-fill" style="width:48%;background:#D85A30;"></div></div><div class="prog-val"><span style="color:#D85A30;font-weight:600;">48</span> <span style="font-size:10px;color:#D85A30;">+3 ▼</span></div></div>
+      <div class="prog-row"><div class="prog-label">Actionability</div><div class="prog-wrap"><div class="prog-fill" style="width:67%;background:#1D9E75;"></div></div><div class="prog-val"><span style="color:#1D9E75;font-weight:600;">67</span> <span style="font-size:10px;color:#1D9E75;">+5</span></div></div>
+      <div style="font-size:11px;color:#999;margin-top:8px;">Progress and RE are the NTS drag. Both driven by travel and office energy.</div>
+    </div>
+    <div class="card">
+      <div class="label">Category position (tCO2e/FTE)</div>
+      <div style="position:relative;margin:20px 0 8px;">
+        <div style="height:22px;border-radius:5px;overflow:hidden;position:relative;">
+          <div style="position:absolute;left:0;width:25%;height:100%;background:#FAECE7;"></div>
+          <div style="position:absolute;left:25%;width:30%;height:100%;background:#FAEEDA;"></div>
+          <div style="position:absolute;left:55%;width:38%;height:100%;background:#E1F5EE;"></div>
+          <div style="position:absolute;left:93%;width:7%;height:100%;background:#085041;"></div>
+          <div style="position:absolute;left:55%;top:0;width:2px;height:100%;background:#0F6E56;z-index:2;"></div>
+        </div>
+        <div style="position:absolute;left:42%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#EF9F27;border:2.5px solid white;"></div>
+        <div style="position:absolute;left:55%;top:-20px;transform:translateX(-50%);font-size:10px;background:#0F6E56;color:white;padding:1px 6px;border-radius:3px;white-space:nowrap;font-weight:600;">Good: 4.5</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:#999;margin-bottom:12px;"><span>Worst: 18</span><span>Avg: 6.2</span><span>Best: 0.5</span></div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:8px;height:8px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></span><span style="color:#666;flex:1;">Apex Advisory</span><span style="font-weight:600;color:#1D9E75;">1.8</span><span class="badge" style="background:#E1F5EE;color:#085041;margin-left:4px;">Leading</span></div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:8px;height:8px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></span><span style="color:#666;flex:1;">BrightPath</span><span style="font-weight:600;color:#1D9E75;">3.7</span><span class="badge" style="background:#E1F5EE;color:#085041;margin-left:4px;">Good</span></div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:8px;height:8px;border-radius:50%;background:#EF9F27;flex-shrink:0;"></span><span style="color:#666;flex:1;">Meridian</span><span style="font-weight:600;color:#EF9F27;">5.8</span><span class="badge" style="background:#FAEEDA;color:#633806;margin-left:4px;">Below good</span></div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="width:8px;height:8px;border-radius:50%;background:#D85A30;flex-shrink:0;"></span><span style="color:#666;flex:1;">Legacy Consulting</span><span style="font-weight:600;color:#D85A30;">13.4</span><span class="badge" style="background:#FAECE7;color:#712B13;margin-left:4px;">At risk</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Initiatives -->
+  <div class="card" style="margin-bottom:16px;">
+    <div class="label">Sustainability initiatives and programmes</div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:12px;" id="initiatives-grid"></div>
+    <div style="padding-top:10px;border-top:1px solid #E0DED8;">
+      <div style="font-size:11px;font-weight:600;color:#1A1A1A;margin-bottom:6px;">Gaps with direct NTS impact</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span class="badge" style="background:#FAECE7;color:#712B13;">RE100 — would lift RE score est. 8–12 pts</span>
+        <span class="badge" style="background:#FAECE7;color:#712B13;">ISO 14001 overdue — contractual obligation missed</span>
+        <span class="badge" style="background:#FAEEDA;color:#633806;">CDP Band B+ — anchors Progress score, removes estimation</span>
+        <span class="badge" style="background:#FAEEDA;color:#633806;">Scope 3 supply chain — currently excluded from inventory</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Milestones + trigger + quadrant -->
+  <div class="grid2" style="margin-bottom:16px;">
+    <div class="card">
+      <div class="label">Milestone tracker</div>
+      <div class="ms-row"><span class="badge" style="background:#E1F5EE;color:#085041;min-width:48px;text-align:center;">Met</span><span style="flex:1;">NTS year 1 target (63)</span><span style="font-size:11px;color:#999;">Month 18</span></div>
+      <div class="ms-row"><span class="badge" style="background:#FAECE7;color:#712B13;min-width:48px;text-align:center;">Missed</span><span style="flex:1;">Air travel −60% by month 18</span><span style="font-size:11px;color:#D85A30;font-weight:600;">Trigger</span></div>
+      <div class="ms-row"><span class="badge" style="background:#FAECE7;color:#712B13;min-width:48px;text-align:center;">Missed</span><span style="flex:1;">100% renewable office energy</span><span style="font-size:11px;color:#999;">65% only</span></div>
+      <div class="ms-row"><span class="badge" style="background:#FAECE7;color:#712B13;min-width:48px;text-align:center;">Missed</span><span style="flex:1;">ISO 14001 certification</span><span style="font-size:11px;color:#D85A30;font-weight:600;">Overdue</span></div>
+      <div class="ms-row"><span class="badge" style="background:#E1F5EE;color:#085041;min-width:48px;text-align:center;">Met</span><span style="flex:1;">SBTi near-term submission</span><span style="font-size:11px;color:#999;">Month 11</span></div>
+      <div class="ms-row"><span class="badge" style="background:#FAEEDA;color:#633806;min-width:48px;text-align:center;">Partial</span><span style="flex:1;">CDP full disclosure</span><span style="font-size:11px;color:#999;">Band C only</span></div>
+      <div class="ms-row"><span class="badge" style="background:#FAEEDA;color:#633806;min-width:48px;text-align:center;">Mixed</span><span style="flex:1;">Quarterly travel carbon KPI</span><span style="font-size:11px;color:#999;">Q4 missed</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card">
+        <div class="label">Active trigger</div>
+        <div class="trig">
+          <div class="trig-head">Air travel + ISO 14001 — 17 Mar 2026</div>
+          <div class="trig-body">Air travel: 40% reduction vs 60% target. ISO 14001: overdue since month 18. Compound breach. 90-day cure period active. Remediation plan due 16 April 2026.</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label">NTS quadrant position</div>
+        <div class="quad-grid">
+          <div class="quad-cell" style="background:#E1F5EE;color:#085041;opacity:0.3;font-size:11px;">Ambitious but constrained</div>
+          <div class="quad-cell" style="background:#E1F5EE;color:#085041;opacity:0.3;font-size:11px;">Leading</div>
+          <div class="quad-cell" style="background:#FAECE7;color:#712B13;opacity:0.3;font-size:11px;">At risk</div>
+          <div class="quad-cell" style="background:#FAEEDA;color:#633806;border:2px solid #EF9F27;font-size:11px;">Coasting ←</div>
+        </div>
+        <div style="font-size:12px;color:#666;margin-top:8px;line-height:1.4;">Low headwinds. Underdelivering. No context defence.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Levers + Actions -->
+  <div class="grid2" style="margin-bottom:16px;">
+    <div class="card">
+      <div class="label">In-life levers available</div>
+      <div class="lever-row"><span class="badge" style="background:#FAECE7;color:#712B13;flex-shrink:0;">Active</span><div><div class="lever-text">Price adjustment withheld (−2% day rate)</div><div class="lever-when">Release: verified 60% air travel reduction</div></div></div>
+      <div class="lever-row"><span class="badge" style="background:#FAECE7;color:#712B13;flex-shrink:0;">Active</span><div><div class="lever-text">Remediation plan demanded</div><div class="lever-when">Due 16 Apr 2026. Non-submission = material breach</div></div></div>
+      <div class="lever-row"><span class="badge" style="background:#FAECE7;color:#712B13;flex-shrink:0;">Active</span><div><div class="lever-text">ISO 14001 breach notice</div><div class="lever-when">Separate from travel trigger. Issue immediately.</div></div></div>
+      <div class="lever-row"><span class="badge" style="background:#FAEEDA;color:#633806;flex-shrink:0;">Available</span><div><div class="lever-text">Volume commitment suspension</div><div class="lever-when">One more quarterly miss activates this</div></div></div>
+      <div class="lever-row"><span class="badge" style="background:#FAEEDA;color:#633806;flex-shrink:0;">Available</span><div><div class="lever-text">Parallel sourcing during cure period</div><div class="lever-when">Permitted — not yet activated</div></div></div>
+      <div class="lever-row"><span class="badge" style="background:#F1EFE8;color:#5F5E5A;flex-shrink:0;">Backstop</span><div><div class="lever-text">Termination — NTS floor 48, 60-day notice</div><div class="lever-when">After day 90 if cure period fails</div></div></div>
+    </div>
+    <div class="card">
+      <div class="label">Recommended actions — next 30 days</div>
+      <div class="action-item">
+        <div class="action-num">1</div>
+        <div><div class="action-text">Demand remediation plan — travel policy, remote schedule, REGO timeline, ISO 14001 recovery plan</div><div class="action-due">Due from Meridian: 16 April 2026</div></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">2</div>
+        <div><div class="action-text">Issue separate ISO 14001 breach notice — compound risk alongside travel trigger</div><div class="action-due">Initiate immediately</div></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">3</div>
+        <div><div class="action-text">Request expense system API connection — resolves Q4 data dispute and removes estimation permanently</div><div class="action-due">Include in remediation requirements</div></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">4</div>
+        <div><div class="action-text">Share category benchmarking — BrightPath closing on good threshold. Frame RE100 and Energize as fastest path to closing the RE score gap.</div><div class="action-due">In remediation review meeting</div></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num" style="background:#E0DED8;color:#666;">5</div>
+        <div><div class="action-text" style="color:#666;">If plan not received by day 30 — escalate both triggers to material breach and activate parallel sourcing</div><div class="action-due">Contingent — 16 April 2026</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data status -->
+  <div class="card">
+    <div class="label">Data status</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:8px;height:8px;border-radius:50%;background:#1D9E75;"></span>SBTi — verified</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:8px;height:8px;border-radius:50%;background:#1D9E75;"></span>TPI — verified (level 3)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:8px;height:8px;border-radius:50%;background:#EF9F27;"></span>CDP — partial (Band C)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:8px;height:8px;border-radius:50%;background:#D85A30;"></span>Travel carbon — disputed (Q4 methodology)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:8px;height:8px;border-radius:50%;background:#EF9F27;"></span>REGO certificates — pending</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:8px;height:8px;border-radius:50%;background:#1D9E75;"></span>Team location — connected (HR API)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:8px;height:8px;border-radius:50%;background:#888;"></span>Expense API — not connected</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:8px;height:8px;border-radius:50%;background:#888;"></span>Building energy API — not connected</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════ SCRIPTS ══════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ── NAVIGATION ──
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('#topnav .nav-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  if(id==='s-discover') initDiscover();
+  if(id==='s-spm') initSPM();
+  if(id==='s-negotiate') initNegotiate();
+}
+
+function subNav(prefix, i, btn) {
+  document.querySelectorAll('[id^="'+prefix+'-"]').forEach(p=>p.classList.remove('on'));
+  document.getElementById(prefix+'-'+i).classList.add('on');
+  btn.parentElement.querySelectorAll('.sub-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// ── OVERVIEW ──
+const ovStages = [
+  {name:'Define', tag:'Set the standard', tagline:'What good looks like before you go to market', values:[
+    {t:'Carbon benchmarks',s:'Range, best-in-class, and the why behind the gap — by category'},
+    {t:'Pathway decision',s:'Specification, certification, commercial engagement, or performance management'},
+    {t:'Trajectory setting',s:'Where suppliers start, where good is, and the path between them'},
+    {t:'Data compact',s:'The conditions under which accountability is possible'},
+  ]},
+  {name:'Discover', tag:'Know your supply base', tagline:'Who is ready, who is at risk, and why', values:[
+    {t:'Net Transition Scores',s:'A diagnostic landscape — not a league table. Who, and why.'},
+    {t:'Priority Score',s:'NTS × log(emissions) — where effort has the highest leverage'},
+    {t:'Substitution signals',s:'Low NTS + high influence + available alternatives = credible exit case'},
+    {t:'Impact × proximity',s:'Which lever applies where — prevents lever mismatch'},
+  ]},
+  {name:'Negotiate', tag:'Build it into the deal', tagline:'Commercial structuring for cost and carbon', values:[
+    {t:'Lever library',s:'26 levers across specification, certification, commercial, and performance'},
+    {t:'NTS quadrant logic',s:'Leading / Coasting / Ambitious but constrained / At risk — each needs a different deal'},
+    {t:'Deal builder',s:'Tier and pathway-driven deal structure — not a template, a calibration'},
+    {t:'Clause language',s:'Near-contract-ready "if you, then I" language for every mechanism'},
+  ]},
+  {name:'SPM', tag:'Hold the line in-life', tagline:'Track, trigger, act — without starting from scratch', values:[
+    {t:'Contract tracking',s:'NTS refresh, milestone status, trigger conditions — all in one view'},
+    {t:'Category landscape',s:'Relative and absolute performance — is the supplier keeping pace?'},
+    {t:'In-life lever library',s:'What commercial tools are available within the current contract right now'},
+    {t:'Data loop',s:'Buyer-pulled, supplier-pushed, live connected — three data flows, one score'},
+  ]},
+  {name:'Innovate', tag:'Close the gap', tagline:'What exists today to close the distance to best in class', values:[
+    {t:'Gap to best in class',s:'Component-level delta from where supplier is to where good is'},
+    {t:'Solution mapping',s:'Initiatives, programmes, and partners mapped directly to the specific gap'},
+    {t:'Industry initiatives',s:'SBTi, CDP, RE100, Energize, TPI, ISO 14001 — curated by relevance'},
+    {t:'Co-investment',s:'Where buyer scale can catalyse supplier transition and capture shared value'},
+  ]},
+];
+let ovActive = 0;
+function renderOverview() {
+  const row = document.getElementById('ov-stages');
+  row.innerHTML = ovStages.map((s,i)=>`
+    <button onclick="ovSel(${i})" style="flex:1;min-width:80px;padding:10px 8px;border-radius:8px;border:1px solid ${i===ovActive?'#0F6E56':'#E0DED8'};background:${i===ovActive?'#E1F5EE':'white'};cursor:pointer;text-align:center;">
+      <div style="font-size:11px;color:#999;margin-bottom:2px;">0${i+1}</div>
+      <div style="font-size:13px;font-weight:600;color:${i===ovActive?'#085041':'#1A1A1A'};">${s.name}</div>
+      <div style="font-size:11px;color:${i===ovActive?'#0F6E56':'#999'};margin-top:2px;">${s.tag}</div>
+    </button>`).join('');
+  const s = ovStages[ovActive];
+  document.getElementById('ov-detail').innerHTML = `
+    <div style="font-size:15px;font-weight:600;color:#1A1A1A;margin-bottom:4px;">${s.name} <span style="font-size:13px;font-weight:400;color:#666;">— ${s.tagline}</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+      ${s.values.map(v=>`<div style="display:flex;gap:8px;"><div style="width:6px;height:6px;border-radius:50%;background:#1D9E75;flex-shrink:0;margin-top:6px;"></div><div><div style="font-size:13px;font-weight:600;color:#1A1A1A;">${v.t}</div><div style="font-size:12px;color:#666;margin-top:1px;">${v.s}</div></div></div>`).join('')}
+    </div>`;
+}
+function ovSel(i){ovActive=i;renderOverview();}
+renderOverview();
+
+// ── DEFINE — clauses ──
+const specC = [
+  {tag:'Required',tf:'#E1F5EE',tc:'#0F6E56',title:'Carbon intensity ceiling per FTE',clause:'"The supplier shall demonstrate a Scope 1 and 2 carbon intensity of no greater than 4.5 tCO2e per FTE per annum, measured at the delivering entity level, verified against CDP or equivalent third-party disclosure."',rationale:'Sets the entry standard. Eliminates the bottom quartile at source. 75% of the journey from worst to best in class — not arbitrary, but evidenced.'},
+  {tag:'Required',tf:'#E1F5EE',tc:'#0F6E56',title:'Local team resourcing to minimise travel',clause:'"A minimum of 80% of billable hours shall be delivered by personnel based within 50 miles of the primary delivery location. Any deviation requires prior written approval and a carbon offset plan."',rationale:'Business travel is typically the largest single carbon driver in professional services. Addresses it at specification stage, not in arrears.'},
+  {tag:'Preferred',tf:'#FAEEDA',tc:'#854F0B',title:'Default remote delivery with justified on-site presence',clause:'"The supplier shall operate a remote-first delivery model as default. On-site attendance shall be limited to activities where physical presence is demonstrably necessary."',rationale:'Shifts from opt-in remote to opt-in on-site. Materially changes emissions without impacting delivery quality.'},
+  {tag:'Preferred',tf:'#FAEEDA',tc:'#854F0B',title:'Rail-first travel policy for journeys under 3 hours',clause:'"Where travel is required, the supplier shall adopt a rail-first policy for all journeys where train journey time does not exceed 3 hours. Air travel for domestic destinations is not permitted without written approval."',rationale:'Domestic short-haul air is 10–15× the carbon intensity of rail. A 3-hour threshold captures the majority of UK and European cases.'},
+  {tag:'Preferred',tf:'#FAEEDA',tc:'#854F0B',title:'100% renewable energy at delivery offices',clause:'"The supplier shall procure 100% renewable electricity, verified by REGO certificates or equivalent, at all offices where personnel delivering this contract are primarily based."',rationale:'REGOs are low-cost and widely available. A reasonable ask even for mid-market suppliers.'},
+];
+const certC = [
+  {tag:'Required',tf:'#E1F5EE',tc:'#0F6E56',title:'GHG Protocol-compliant emissions inventory',clause:'"The supplier shall maintain a Scope 1, 2, and material Scope 3 emissions inventory prepared in accordance with the GHG Protocol Corporate Standard. Independently assured to limited assurance as minimum."',rationale:'The baseline. Without it, carbon data is incomparable across suppliers.'},
+  {tag:'Preferred',tf:'#FAEEDA',tc:'#854F0B',title:'CDP disclosure at Band C or above',clause:'"The supplier is requested to participate in CDP climate disclosure at a minimum response level of Band C. Where CDP disclosure is not current, the supplier shall provide equivalent data within 90 days of contract signature."',rationale:'CDP data integrates directly into N2K scoring, removing estimation. Band C is achievable for most mid-to-large suppliers.'},
+  {tag:'Preferred',tf:'#FAEEDA',tc:'#854F0B',title:'ISO 14001 environmental management certification',clause:'"The supplier shall hold ISO 14001 certification, or equivalent, at the delivering entity level. Where not current at contract award, certification must be achieved within 18 months."',rationale:'Establishes management system discipline — the processes that make improvement repeatable.'},
+  {tag:'Optional',tf:'#E6F1FB',tc:'#185FA5',title:'B Corp certification',clause:'"Where the supplier holds B Corp certification, this shall be recognised as satisfying the environmental management requirement and shall attract a positive weighting in the sustainability evaluation criterion."',rationale:'A leading indicator of embedded sustainability governance. Encourages suppliers who have invested in the broader standard.'},
+];
+function renderClauses(arr, containerId) {
+  document.getElementById(containerId).innerHTML = arr.map(c=>`
+    <div class="clause-box">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span class="badge" style="background:${c.tf};color:${c.tc};">${c.tag}</span>
+        <span style="font-size:14px;font-weight:600;color:#1A1A1A;">${c.title}</span>
+      </div>
+      <div class="clause-text">${c.clause}</div>
+      <div class="clause-rationale">Rationale: ${c.rationale}</div>
+    </div>`).join('');
+}
+renderClauses(specC,'spec-clauses');
+renderClauses(certC,'cert-clauses');
+
+// ── DISCOVER ──
+const suppliers = [
+  {name:'Apex Advisory',   nts:71, em:2100, spend:3.2, inf:'High',   alts:true,  col:'#1D9E75', q:'tr'},
+  {name:'BrightPath',      nts:67, em:1800, spend:1.8, inf:'Medium', alts:true,  col:'#1D9E75', q:'tr'},
+  {name:'Meridian',        nts:58, em:3800, spend:2.1, inf:'High',   alts:true,  col:'#EF9F27', q:'br'},
+  {name:'Strata Partners', nts:43, em:2400, spend:1.2, inf:'Medium', alts:false, col:'#EF9F27', q:'bl'},
+  {name:'Legacy Consulting',nts:24, em:1600, spend:0.6, inf:'High',   alts:true,  col:'#D85A30', q:'bl'},
+];
+let discoverDone=false;
+function initDiscover(){
+  if(discoverDone) return; discoverDone=true;
+  // Supplier cards
+  const sorted = [...suppliers].map(s=>({...s,ps:Math.round((100-s.nts)*Math.log10(s.em)*10)})).sort((a,b)=>b.ps-a.ps);
+  document.getElementById('sup-cards').innerHTML = sorted.map((s,i)=>`
+    <div style="background:white;border:1px solid ${s.nts>=65?'#9FE1CB':s.nts>=45?'#FAC775':'#F5C4B3'};border-radius:10px;padding:12px;text-align:center;">
+      <div style="width:52px;height:52px;border-radius:50%;background:${s.col}22;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:20px;font-weight:700;color:${s.col};">${s.nts}</div>
+      <div style="font-size:13px;font-weight:600;color:#1A1A1A;">${s.name}</div>
+      <div style="font-size:11px;color:#666;margin-top:2px;">${(s.em/1000).toFixed(1)}k tCO2e</div>
+      <div style="font-size:11px;color:#666;">£${s.spend}m spend</div>
+      <span class="badge" style="margin-top:6px;background:${i===0?'#FAECE7':i<=1?'#FAEEDA':'#F1EFE8'};color:${i===0?'#712B13':i<=1?'#633806':'#5F5E5A'};">P${i+1} · PS ${s.ps}</span>
+    </div>`).join('');
+  // NTS breakdown
+  const comps=[
+    {name:'Apex Advisory',   a:78,p:72,c:65,re:70,ac:68,col:'#1D9E75'},
+    {name:'BrightPath',      a:74,p:68,c:62,re:65,ac:66,col:'#1D9E75'},
+    {name:'Meridian',        a:78,p:52,c:58,re:48,ac:67,col:'#EF9F27'},
+    {name:'Strata Partners', a:38,p:42,c:55,re:40,ac:44,col:'#EF9F27'},
+    {name:'Legacy Consulting',a:15,p:22,c:48,re:18,ac:20,col:'#D85A30'},
+  ];
+  document.getElementById('nts-breakdown').innerHTML = comps.map(s=>`
+    <div style="background:white;border:1px solid #E0DED8;border-radius:8px;padding:12px 14px;margin-bottom:8px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="font-size:14px;font-weight:600;color:#1A1A1A;">${s.name}</span>
+        <span style="font-size:12px;color:#999;">NTS ${suppliers.find(x=>x.name.startsWith(s.name.split(' ')[0])||s.name.includes(x.name.split(' ')[0]))?.nts||''}</span>
+      </div>
+      ${[['Ambition',s.a],['Progress',s.p],['Context',s.c],['RE',s.re],['Actionability',s.ac]].map(([k,v])=>`
+        <div class="prog-row"><div class="prog-label" style="width:100px;">${k}</div><div class="prog-wrap"><div class="prog-fill" style="width:${v}%;background:${s.col};"></div></div><div class="prog-val" style="width:30px;color:${s.col};font-weight:600;">${v}</div></div>`).join('')}
+    </div>`).join('');
+  // Priority chart
+  const ctx = document.getElementById('ps-chart');
+  new Chart(ctx,{type:'bubble',data:{datasets:sorted.map(s=>({label:s.name,data:[{x:s.nts,y:s.em,r:Math.max(8,s.ps/28)}],backgroundColor:s.col+'99',borderColor:s.col,borderWidth:1.5}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const s=sorted[c.datasetIndex];return[s.name,`NTS: ${s.nts}`,`Emissions: ${s.em.toLocaleString()}t`,`PS: ${s.ps}`];}}}},scales:{x:{min:10,max:90,title:{display:true,text:'NTS (readiness →)',font:{size:11}},ticks:{font:{size:11}},grid:{color:'rgba(0,0,0,0.05)'}},y:{min:500,max:5000,title:{display:true,text:'Emissions (tCO2e)',font:{size:11}},ticks:{font:{size:11},callback:v=>v.toLocaleString()},grid:{color:'rgba(0,0,0,0.05)'}}}}});
+  document.getElementById('ps-legend').innerHTML = sorted.map(s=>`<span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:${s.col};display:inline-block;"></span>${s.name} <span style="color:#999;">PS ${s.ps}</span></span>`).join('');
+  document.getElementById('engage-seq').innerHTML = sorted.map((s,i)=>`
+    <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F1EFE8;">
+      <div style="width:26px;height:26px;border-radius:50%;background:${i===0?'#0F6E56':i===1?'#EF9F27':'#E0DED8'};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:${i<=1?'white':'#666'};flex-shrink:0;">${i+1}</div>
+      <div style="flex:1;"><span style="font-size:13px;font-weight:600;color:#1A1A1A;">${s.name}</span><span style="font-size:12px;color:#999;margin-left:8px;">NTS ${s.nts} · ${s.em.toLocaleString()}t · £${s.spend}m</span></div>
+      <span class="badge" style="background:${i===0?'#E1F5EE':i===1?'#FAEEDA':'#F1EFE8'};color:${i===0?'#085041':i===1?'#633806':'#5F5E5A'};">${i===0?'Engage now':i===1?'Engage next':i<=3?'Schedule':'Monitor'}</span>
+    </div>`).join('');
+  buildSubSVG();
+  buildIPSVG();
+}
+
+function buildSubSVG() {
+  const svg=document.getElementById('sub-svg');
+  const W=640,H=380,pad=60,qw=(W-pad*2)/2,qh=(H-pad*2)/2,cx=pad+qw,cy=pad+qh;
+  const zones=[
+    {x:pad,y:pad,w:qw,h:qh,fill:'#FAEEDA',title:'Develop',lines:['High ambition','Low readiness'],tc:'#633806',dc:'#854F0B'},
+    {x:cx,y:pad,w:qw,h:qh,fill:'#E1F5EE',title:'Retain',lines:['High ambition','High readiness'],tc:'#085041',dc:'#0F6E56'},
+    {x:pad,y:cy,w:qw,h:qh,fill:'#FAECE7',title:'Substitute',lines:['Low ambition','Low readiness'],tc:'#712B13',dc:'#993C1D'},
+    {x:cx,y:cy,w:qw,h:qh,fill:'#E1F5EE',title:'Sustain',lines:['Low ambition','High readiness'],tc:'#085041',dc:'#0F6E56'},
+  ];
+  let out='';
+  zones.forEach(z=>{
+    out+=`<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${z.fill}" stroke="#E0DED8" stroke-width="0.5"/>`;
+    const mx=z.x+z.w/2,my=z.y+z.h/2;
+    out+=`<text x="${mx}" y="${my-20}" text-anchor="middle" font-size="15" font-weight="600" font-family="system-ui,sans-serif" fill="${z.tc}">${z.title}</text>`;
+    z.lines.forEach((l,i)=>out+=`<text x="${mx}" y="${my+2+i*16}" text-anchor="middle" font-size="11" font-family="system-ui,sans-serif" fill="${z.dc}">${l}</text>`);
+  });
+  out+=`<line x1="${cx}" y1="${pad}" x2="${cx}" y2="${H-pad}" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>`;
+  out+=`<line x1="${pad}" y1="${cy}" x2="${W-pad}" y2="${cy}" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>`;
+  out+=`<text x="${W/2}" y="${H-8}" text-anchor="middle" font-size="12" font-family="system-ui,sans-serif" fill="#999">Procurement influence →</text>`;
+  out+=`<text x="12" y="${H/2}" text-anchor="middle" font-size="12" font-family="system-ui,sans-serif" fill="#999" transform="rotate(-90 12 ${H/2})">Transition readiness →</text>`;
+  const posMap={'Apex Advisory':{xi:0.82,yi:0.82},'BrightPath':{xi:0.62,yi:0.75},'Meridian':{xi:0.72,yi:0.38},'Strata Partners':{xi:0.42,yi:0.22},'Legacy Consulting':{xi:0.78,yi:0.12}};
+  suppliers.forEach(s=>{
+    const p=posMap[s.name];if(!p) return;
+    const sx=pad+p.xi*(W-pad*2),sy=pad+(1-p.yi)*(H-pad*2);
+    out+=`<circle cx="${sx}" cy="${sy}" r="9" fill="${s.col}" opacity="0.85"/>`;
+    const anchor=p.xi>0.6?'end':'start',lx=p.xi>0.6?sx-13:sx+13;
+    out+=`<text x="${lx}" y="${sy+4}" text-anchor="${anchor}" font-size="11" font-family="system-ui,sans-serif" font-weight="600" fill="${s.col}">${s.name.split(' ')[0]}</text>`;
+  });
+  svg.innerHTML=out;
+  document.getElementById('sub-table').innerHTML=`<div style="display:flex;flex-direction:column;gap:6px;">${[
+    {s:'Legacy Consulting',nts:24,inf:'High',alts:'Yes',action:'Substitution review',col:'#D85A30',bg:'#FAECE7'},
+    {s:'Meridian',nts:58,inf:'High',alts:'Yes',action:'Priority development',col:'#EF9F27',bg:'#FAEEDA'},
+    {s:'Strata Partners',nts:43,inf:'Medium',alts:'No',action:'Structured engagement',col:'#EF9F27',bg:'#FAEEDA'},
+    {s:'BrightPath',nts:67,inf:'Medium',alts:'Yes',action:'Sustain & monitor',col:'#1D9E75',bg:'#E1F5EE'},
+    {s:'Apex Advisory',nts:71,inf:'High',alts:'Yes',action:'Retain, benchmark',col:'#1D9E75',bg:'#E1F5EE'},
+  ].map(r=>`<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:7px;border:1px solid #E0DED8;background:white;"><div style="width:8px;height:8px;border-radius:50%;background:${r.col};flex-shrink:0;"></div><div style="width:140px;font-size:13px;font-weight:600;color:#1A1A1A;">${r.s}</div><div style="font-size:12px;color:#666;width:55px;">NTS ${r.nts}</div><div style="font-size:12px;color:#666;width:80px;">Inf: ${r.inf}</div><div style="font-size:12px;color:#666;flex:1;">Alts: ${r.alts}</div><span class="badge" style="background:${r.bg};color:${r.col};">${r.action}</span></div>`).join('')}</div>`;
+}
+
+function buildIPSVG() {
+  const svg=document.getElementById('ip-svg');
+  const W=640,H=400,pad=64,qw=(W-pad*2)/2,qh=(H-pad*2)/2,cx=pad+qw,cy=pad+qh;
+  const qs=[
+    {x:pad,y:pad,w:qw,h:qh,fill:'#FAEEDA',title:'Certify & specify',lines:['High impact','Low proximity'],detail:'Standards, certification\nat source',tc:'#633806',dc:'#854F0B'},
+    {x:cx,y:pad,w:qw,h:qh,fill:'#E1F5EE',title:'Commercial engagement',lines:['High impact','High proximity'],detail:'Pricing, milestones,\ncontracts',tc:'#085041',dc:'#0F6E56'},
+    {x:pad,y:cy,w:qw,h:qh,fill:'#F1EFE8',title:'Monitor & report',lines:['Low impact','Low proximity'],detail:'Light-touch KPIs\nand benchmarking',tc:'#5F5E5A',dc:'#888'},
+    {x:cx,y:cy,w:qw,h:qh,fill:'#E1F5EE',title:'Performance manage',lines:['Low impact','High proximity'],detail:'KPIs, SLAs,\nremediation',tc:'#085041',dc:'#0F6E56'},
+  ];
+  let out='';
+  qs.forEach(q=>{
+    out+=`<rect x="${q.x}" y="${q.y}" width="${q.w}" height="${q.h}" fill="${q.fill}" stroke="#E0DED8" stroke-width="0.5"/>`;
+    const mx=q.x+q.w/2,my=q.y+q.h/2;
+    out+=`<text x="${mx}" y="${my-28}" text-anchor="middle" font-size="14" font-weight="600" font-family="system-ui,sans-serif" fill="${q.tc}">${q.title}</text>`;
+    q.lines.forEach((l,i)=>out+=`<text x="${mx}" y="${my-8+i*16}" text-anchor="middle" font-size="11" font-family="system-ui,sans-serif" fill="${q.dc}">${l}</text>`);
+    q.detail.split('\n').forEach((l,i)=>out+=`<text x="${mx}" y="${my+22+i*14}" text-anchor="middle" font-size="11" font-family="system-ui,sans-serif" fill="${q.dc}" font-style="italic">${l}</text>`);
+  });
+  out+=`<line x1="${cx}" y1="${pad}" x2="${cx}" y2="${H-pad}" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>`;
+  out+=`<line x1="${pad}" y1="${cy}" x2="${W-pad}" y2="${cy}" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>`;
+  out+=`<text x="${W/2}" y="${H-10}" text-anchor="middle" font-size="12" font-family="system-ui,sans-serif" fill="#999">Procurement proximity →</text>`;
+  out+=`<text x="12" y="${H/2}" text-anchor="middle" font-size="12" font-family="system-ui,sans-serif" fill="#999" transform="rotate(-90 12 ${H/2})">Carbon impact →</text>`;
+  svg.innerHTML=out;
+  const ex=[
+    {topic:'Business travel policy',impact:'High',proximity:'High',lever:'Commercial engagement — travel KPI linked to day rate adjustment',col:'#1D9E75',bg:'#E1F5EE'},
+    {topic:'Office energy source',impact:'Medium',proximity:'High',lever:'Performance management — REGO KPI, quarterly reporting obligation',col:'#1D9E75',bg:'#E1F5EE'},
+    {topic:'Upstream supply chain',impact:'High',proximity:'Low',lever:'Certification — require GHG Protocol Scope 3 inventory, CDP disclosure',col:'#EF9F27',bg:'#FAEEDA'},
+    {topic:'Data centre intensity',impact:'Medium',proximity:'Low',lever:'Certify & specify — cloud provider renewable energy standard in specification',col:'#888',bg:'#F1EFE8'},
+    {topic:'Sub-contracted staff',impact:'Low',proximity:'Medium',lever:'Performance management — cascade standards via supplier code of conduct',col:'#888',bg:'#F1EFE8'},
+  ];
+  document.getElementById('ip-examples').innerHTML=ex.map(e=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:7px;border:1px solid #E0DED8;background:white;margin-bottom:6px;"><div style="width:8px;height:8px;border-radius:50%;background:${e.col};flex-shrink:0;margin-top:4px;"></div><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:2px;">${e.topic}</div><div style="font-size:12px;color:#666;">${e.lever}</div></div><div style="display:flex;flex-direction:column;gap:3px;flex-shrink:0;text-align:right;"><span style="font-size:10px;padding:1px 6px;border-radius:3px;background:${e.bg};color:${e.col};font-weight:600;">Impact: ${e.impact}</span><span style="font-size:10px;padding:1px 6px;border-radius:3px;background:${e.bg};color:${e.col};font-weight:600;">Proximity: ${e.proximity}</span></div></div>`).join('');
+}
+
+// ── NEGOTIATE ──
+let negDone=false;
+function initNegotiate(){
+  if(negDone) return; negDone=true;
+  buildQuadSVG();
+  buildLeverLib();
+  buildDealOutput();
+  buildNegClauses();
+}
+
+function buildQuadSVG() {
+  const svg=document.getElementById('quad-svg');
+  const W=640,H=380,pad=60,qw=(W-pad*2)/2,qh=(H-pad*2)/2,cx=pad+qw,cy=pad+qh;
+  const qs=[
+    {id:'tl',x:pad,y:pad,w:qw,h:qh,fill:'#E1F5EE',title:'Ambitious but constrained',l1:'High ambition & delivery',l2:'Strong headwinds',tc:'#085041',dc:'#0F6E56'},
+    {id:'tr',x:cx,y:pad,w:qw,h:qh,fill:'#E1F5EE',title:'Leading',l1:'High ambition & delivery',l2:'Low tailwinds',tc:'#085041',dc:'#0F6E56'},
+    {id:'bl',x:pad,y:cy,w:qw,h:qh,fill:'#FAECE7',title:'At risk',l1:'Low ambition & delivery',l2:'Strong headwinds',tc:'#712B13',dc:'#993C1D'},
+    {id:'br',x:cx,y:cy,w:qw,h:qh,fill:'#FAEEDA',title:'Coasting',l1:'Low ambition & delivery',l2:'Low tailwinds',tc:'#633806',dc:'#854F0B'},
+  ];
+  let out='';
+  qs.forEach(q=>{
+    const mx=q.x+q.w/2,my=q.y+q.h/2;
+    out+=`<rect id="qr-${q.id}" x="${q.x}" y="${q.y}" width="${q.w}" height="${q.h}" fill="${q.fill}" stroke="#E0DED8" stroke-width="0.5" onclick="selectQuad('${q.id}')" style="cursor:pointer;"/>`;
+    out+=`<text x="${mx}" y="${my-22}" text-anchor="middle" font-size="15" font-weight="600" font-family="system-ui,sans-serif" fill="${q.tc}" style="pointer-events:none;">${q.title}</text>`;
+    out+=`<text x="${mx}" y="${my-4}" text-anchor="middle" font-size="11" font-family="system-ui,sans-serif" fill="${q.dc}" style="pointer-events:none;">${q.l1}</text>`;
+    out+=`<text x="${mx}" y="${my+12}" text-anchor="middle" font-size="11" font-family="system-ui,sans-serif" fill="${q.dc}" style="pointer-events:none;">${q.l2}</text>`;
+  });
+  out+=`<line x1="${cx}" y1="${pad}" x2="${cx}" y2="${H-pad}" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>`;
+  out+=`<line x1="${pad}" y1="${cy}" x2="${W-pad}" y2="${cy}" stroke="#ccc" stroke-width="1" stroke-dasharray="4 3"/>`;
+  out+=`<text x="${W/2}" y="${H-8}" text-anchor="middle" font-size="12" font-family="system-ui,sans-serif" fill="#999">← Strong headwinds · Context · Low tailwinds →</text>`;
+  out+=`<text x="12" y="${H/2}" text-anchor="middle" font-size="12" font-family="system-ui,sans-serif" fill="#999" transform="rotate(-90 12 ${H/2})">← Low · Ambition & delivery · High →</text>`;
+  out+=`<rect id="q-sel" x="0" y="0" width="0" height="0" fill="none" stroke="#0F6E56" stroke-width="2.5" rx="2" style="pointer-events:none;"/>`;
+  svg.innerHTML=out;
+}
+
+const quadData={
+  tr:{label:'Leading',sub:'High ambition & delivery · Low tailwinds',col:'#1D9E75',bg:'#E1F5EE',dark:'#085041',x:326,y:24,w:262,h:184,
+    head:'This supplier has no excuses and is using none. Reward progress, share value, build for the long term.',
+    levers:[
+      {type:'Commercial',lever:'Gain-share',text:'Carbon cost reduction split 50/50 on verified CI improvement above 10% per year.'},
+      {type:'Commercial',lever:'Volume commitment',text:'Strong minimum spend guaranteed, subject to NTS staying above current score.'},
+      {type:'Performance',lever:'Light-touch KPIs',text:'Annual reporting with quarterly check-ins. Two misses trigger a collaborative review — not a formal breach.'},
+      {type:'Performance',lever:'Termination backstop',text:'NTS floor set 20 points below current. 180-day cure period. Present but unlikely to be used.'},
+    ],
+    note:'The deal should make them feel that progress has commercial value — and that the relationship is worth protecting.'},
+  tl:{label:'Ambitious but constrained',sub:'High ambition & delivery · Strong headwinds',col:'#0F6E56',bg:'#E1F5EE',dark:'#085041',x:64,y:24,w:262,h:184,
+    head:'Doing the right things in difficult conditions. The deal should invest in unlocking constraints — not penalise for a sector the supplier did not choose.',
+    levers:[
+      {type:'Commercial',lever:'Co-investment',text:'Buyer contributes to transition capex in exchange for contracted carbon performance milestones.'},
+      {type:'Commercial',lever:'Extended volume commitment',text:'Longer-term guarantee to give supplier confidence to invest. Tied to trajectory, not NTS point-in-time.'},
+      {type:'Performance',lever:'Context-adjusted KPIs',text:'Trajectory set against what is achievable in this sector — not best-in-class benchmarks that assume low headwinds.'},
+      {type:'Performance',lever:'Collaborative review',text:'Quarterly reviews framed as joint problem-solving. Buyer brings market intelligence; supplier brings operational data.'},
+    ],
+    note:'The key risk is misreading this position. A supplier here might look similar on NTS to a Coasting supplier — but the commercial response is completely different.'},
+  br:{label:'Coasting',sub:'Low ambition & delivery · Low tailwinds',col:'#EF9F27',bg:'#FAEEDA',dark:'#633806',x:326,y:208,w:262,h:184,
+    head:'Every advantage to act and choosing not to. The deal should make that choice uncomfortable — without ambiguity.',
+    levers:[
+      {type:'Commercial',lever:'No volume guarantee',text:'No minimum spend until NTS trajectory is established and evidenced. Volume is a reward, not a given.'},
+      {type:'Commercial',lever:'Carbon surcharge',text:'Surcharge if CI rises or NTS stagnates for two consecutive quarters. No context defence.'},
+      {type:'Specification',lever:'Hard specification floor',text:'Minimum standards enforced from signing with no grace period. The conditions are favourable — the floor is achievable.'},
+      {type:'Performance',lever:'Substitution clause',text:'Buyer may begin parallel sourcing if NTS does not improve by defined amount within 12 months.'},
+    ],
+    note:'You are not managing a struggling supplier — you are challenging a capable one. The commercial pressure should be direct and unapologetic.'},
+  bl:{label:'At risk',sub:'Low ambition & delivery · Strong headwinds',col:'#D85A30',bg:'#FAECE7',dark:'#712B13',x:64,y:208,w:262,h:184,
+    head:'Genuine difficulty — but not zero expectation. The deal separates what is in the supplier\'s control from what is not.',
+    levers:[
+      {type:'Commercial',lever:'No volume commitment',text:'No guaranteed spend. Any commitment earned through demonstrated improvement on controllable factors.'},
+      {type:'Certification',lever:'Mandatory disclosure',text:'SBTi commitment and CDP disclosure required regardless of headwinds. These are management actions, not technology actions.'},
+      {type:'Performance',lever:'Split KPIs',text:'Separate KPIs for factors the supplier controls vs factors shaped by sector context. Both tracked; accountability differs.'},
+      {type:'Performance',lever:'Exit planning in parallel',text:'Buyer actively develops alternative supply options. Disclosed to the supplier — part of the relationship, not a secret.'},
+    ],
+    note:'Strong headwinds reduce what you can demand on absolute carbon — but not on ambition, disclosure, and management quality. Be precise about this distinction.'},
+};
+
+function selectQuad(q) {
+  const d=quadData[q];
+  const coords={tr:{x:326,y:24,w:262,h:184},tl:{x:64,y:24,w:262,h:184},br:{x:326,y:208,w:262,h:184},bl:{x:64,y:208,w:262,h:184}};
+  const c=coords[q];
+  const hl=document.getElementById('q-sel');
+  hl.setAttribute('x',c.x+2);hl.setAttribute('y',c.y+2);hl.setAttribute('width',c.w-4);hl.setAttribute('height',c.h-4);hl.setAttribute('stroke',d.col);
+  document.getElementById('quad-hint').style.display='none';
+  const pathC={Commercial:{col:'#0F6E56',bg:'#E1F5EE'},Specification:{col:'#534AB7',bg:'#EEEDFE'},Performance:{col:'#854F0B',bg:'#FAEEDA'},Certification:{col:'#185FA5',bg:'#E6F1FB'}};
+  document.getElementById('quad-detail').style.display='block';
+  document.getElementById('quad-detail').innerHTML=`
+    <div style="border:1px solid #E0DED8;border-radius:10px;overflow:hidden;">
+      <div style="padding:12px 16px;background:${d.bg};border-bottom:1px solid #E0DED8;display:flex;align-items:center;gap:10px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:${d.col};"></div>
+        <div><div style="font-size:14px;font-weight:600;color:${d.dark};">${d.label}</div><div style="font-size:11px;color:${d.col};">${d.sub}</div></div>
+      </div>
+      <div style="padding:14px 16px;">
+        <p style="font-size:13px;color:#666;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #F1EFE8;">${d.head}</p>
+        <div class="label">Lever recommendations</div>
+        ${d.levers.map(r=>`<div class="lever-row"><div style="width:120px;flex-shrink:0;"><span class="badge" style="background:${pathC[r.type].bg};color:${pathC[r.type].col};">${r.type}</span><div style="font-size:11px;color:#999;margin-top:3px;">${r.lever}</div></div><div style="flex:1;font-size:12px;color:#1A1A1A;line-height:1.5;">${r.text}</div></div>`).join('')}
+        <div style="background:${d.bg};border-radius:6px;padding:10px 12px;margin-top:12px;font-size:12px;color:${d.dark};line-height:1.5;">${d.note}</div>
+      </div>
+    </div>`;
+}
+
+const levers=[
+  {id:'s1',path:'specification',name:'Sustainable product/service specification',desc:'Defined, measurable sustainability characteristics embedded in what is purchased.',strength:'High'},
+  {id:'s2',path:'specification',name:'Material or input substitution obligations',desc:'Supplier required to transition specific inputs.',strength:'High'},
+  {id:'s3',path:'specification',name:'Local team / geographic sourcing requirements',desc:'Proximity rules to reduce travel emissions and support local delivery.',strength:'Medium'},
+  {id:'s4',path:'specification',name:'Remote-first delivery model',desc:'Default to remote; on-site requires justification.',strength:'High'},
+  {id:'c1',path:'certification',name:'Mandatory certification (ISO 14001, B Corp)',desc:'Floor standard enforced through third-party accreditation.',strength:'High'},
+  {id:'c2',path:'certification',name:'CDP disclosure requirement',desc:'Minimum Band C. Integrates directly into NTS scoring.',strength:'High'},
+  {id:'c3',path:'certification',name:'GHG Protocol inventory assurance',desc:'Independent assurance to limited standard as minimum.',strength:'Medium'},
+  {id:'c4',path:'certification',name:'Third-party audit rights',desc:'Buyer can commission independent audit at any point.',strength:'Medium'},
+  {id:'e1',path:'commercial',name:'Price adjustment — carbon linked',desc:'Day rate adjusts annually based on verified CI change.',strength:'High'},
+  {id:'e2',path:'commercial',name:'Milestone-based incentive payments',desc:'Payments on verified achievement — SBTi, RE%, certifications.',strength:'High'},
+  {id:'e3',path:'commercial',name:'Volume commitment tied to trajectory',desc:'Minimum spend conditional on meeting quarterly carbon trajectory.',strength:'High'},
+  {id:'e4',path:'commercial',name:'Gain-share mechanism',desc:'Carbon cost reduction shared between buyer and supplier.',strength:'High'},
+  {id:'e5',path:'commercial',name:'Open book on travel carbon costs',desc:'Carbon data return included in each invoice.',strength:'Medium'},
+  {id:'e6',path:'commercial',name:'Benchmarking right — annual',desc:'Right to compare against category peers; results shared.',strength:'Medium'},
+  {id:'p1',path:'performance',name:'KPIs with defined methodology',desc:'Carbon metrics specified with measurement approach and verification source.',strength:'High'},
+  {id:'p2',path:'performance',name:'SLAs with financial consequences',desc:'Service levels carry real penalty — not just reporting obligations.',strength:'High'},
+  {id:'p3',path:'performance',name:'Improvement trajectory — step targets',desc:'Annual targets embedded in contract life, not just an end-point.',strength:'High'},
+  {id:'p4',path:'performance',name:'Remediation obligations',desc:'Supplier must submit plan within 30 days of any trigger.',strength:'High'},
+  {id:'p5',path:'performance',name:'Reporting obligations',desc:'Cadence, format and verification standard agreed at signature.',strength:'High'},
+  {id:'p6',path:'performance',name:'Audit rights',desc:'Right to independently verify carbon data at any point.',strength:'Medium'},
+  {id:'p7',path:'performance',name:'Termination trigger — sustained failure',desc:'Defined NTS floor that activates right to exit without penalty.',strength:'High'},
+];
+const pathCfg={specification:{label:'Specification',col:'#534AB7',bg:'#EEEDFE',dark:'#3C3489'},certification:{label:'Certification',col:'#185FA5',bg:'#E6F1FB',dark:'#0C447C'},commercial:{label:'Commercial engagement',col:'#0F6E56',bg:'#E1F5EE',dark:'#085041'},performance:{label:'Performance management',col:'#854F0B',bg:'#FAEEDA',dark:'#633806'}};
+let leverFilter='all',leverSelected=new Set();
+function buildLeverLib(){
+  const btns=document.getElementById('lever-filter-btns');
+  btns.innerHTML=['all','specification','certification','commercial','performance'].map(f=>`<button class="sub-btn${f===leverFilter?' on':''}" onclick="leverFilt('${f}',this)">${f==='all'?'All levers':pathCfg[f].label}</button>`).join('');
+  const filtered=leverFilter==='all'?levers:levers.filter(l=>l.path===leverFilter);
+  const groups=leverFilter==='all'?['specification','certification','commercial','performance']:[leverFilter];
+  document.getElementById('lever-lib').innerHTML=groups.map(g=>{
+    const pc=pathCfg[g],items=filtered.filter(l=>l.path===g);
+    if(!items.length) return '';
+    return `<div style="margin-bottom:16px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="width:10px;height:10px;border-radius:2px;background:${pc.col};display:inline-block;"></span><span style="font-size:13px;font-weight:600;color:#1A1A1A;">${pc.label}</span></div>
+    ${items.map(l=>`<div onclick="toggleLev('${l.id}')" style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:7px;border:1px solid ${leverSelected.has(l.id)?pc.col:'#E0DED8'};background:${leverSelected.has(l.id)?pc.bg:'white'};cursor:pointer;margin-bottom:5px;">
+      <div style="width:16px;height:16px;border-radius:4px;border:1.5px solid ${leverSelected.has(l.id)?pc.col:'#ccc'};background:${leverSelected.has(l.id)?pc.col:'transparent'};flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;">
+        ${leverSelected.has(l.id)?'<div style="width:8px;height:8px;background:white;border-radius:2px;"></div>':''}
+      </div>
+      <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:#1A1A1A;">${l.name}</div><div style="font-size:12px;color:#666;margin-top:2px;">${l.desc}</div></div>
+      <span class="badge" style="background:${l.strength==='High'?pc.bg:'#F1EFE8'};color:${l.strength==='High'?pc.dark:'#666'};">${l.strength}</span>
+    </div>`).join('')}</div>`;
+  }).join('');
+}
+function leverFilt(f,btn){leverFilter=f;document.getElementById('lever-filter-btns').querySelectorAll('.sub-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');buildLeverLib();}
+function toggleLev(id){if(leverSelected.has(id))leverSelected.delete(id);else leverSelected.add(id);buildLeverLib();}
+
+let dbTier='mid',dbPath='commercial';
+const dealTemplates={
+  high:{commercial:[
+    {type:'Commercial',lever:'Gain-share',text:'Carbon cost reduction split 50/50 on verified CI improvement above 10% per year. Supplier earns directly from progress.',trigger:'Annual verified CI report'},
+    {type:'Commercial',lever:'Volume commitment',text:'Minimum spend guaranteed for contract life, subject to NTS staying above current score.',trigger:'Annual NTS review'},
+    {type:'Performance',lever:'Light-touch KPIs',text:'Annual carbon reporting with quarterly check-ins. Two missed check-ins trigger a collaborative review.',trigger:'Quarterly data return'},
+    {type:'Performance',lever:'Termination backstop',text:'NTS floor set 20 points below current. 180-day cure period. Present but unlikely to be used.',trigger:'NTS drops 20+ points'},
+  ]},
+  mid:{commercial:[
+    {type:'Commercial',lever:'Price adjustment',text:'Day rate adjusts ±2% per year based on verified CI change. Improvement of 10%+ earns reduction; rise of 5%+ triggers surcharge. Cap: ±6% over contract life.',trigger:'Annual verified CI report'},
+    {type:'Commercial',lever:'Milestone payment',text:'One-time payment on SBTi validation within 24 months. Second payment on 100% renewable office energy.',trigger:'Verified milestone evidence'},
+    {type:'Commercial',lever:'Volume commitment',text:'Minimum spend conditional on meeting quarterly carbon trajectory. Two consecutive misses suspends commitment.',trigger:'Quarterly trajectory check'},
+    {type:'Specification',lever:'Delivery model',text:'Remote-first model from signing. On-site days agreed at project initiation; quarterly review. Rail-first for all journeys under 3 hours.',trigger:'Project initiation'},
+    {type:'Performance',lever:'Quarterly KPIs',text:'Carbon intensity per FTE and travel carbon reported quarterly against trajectory. Two misses = performance trigger.',trigger:'Quarterly data return'},
+    {type:'Performance',lever:'Remediation obligation',text:'Performance trigger requires remediation plan within 30 days detailing return-to-trajectory actions.',trigger:'30 days post-trigger'},
+    {type:'Performance',lever:'Termination',text:'NTS floor at 45. Active from year 2. 90-day cure period before notice can be served.',trigger:'NTS below 45 for 2 quarters'},
+  ]},
+  low:{commercial:[
+    {type:'Commercial',lever:'No volume guarantee',text:'No minimum spend commitment. Buyer retains full flexibility to reallocate work to alternative suppliers without restriction.',trigger:'From day one'},
+    {type:'Commercial',lever:'Carbon surcharge',text:'5% surcharge applied if CI rises in any quarter vs prior baseline.',trigger:'Quarterly CI report'},
+    {type:'Specification',lever:'Hard specification floor',text:'Minimum specification standards enforced from day one with no grace period. Failure within 60 days triggers breach notice.',trigger:'Month 1 audit'},
+    {type:'Certification',lever:'Mandatory commitments',text:'SBTi commitment within 6 months. CDP disclosure within 90 days. ISO 14001 plan within 60 days. All non-negotiable.',trigger:'Month 6 / Day 90 / Day 60'},
+    {type:'Performance',lever:'Monthly reporting',text:'Carbon intensity reported monthly. First miss triggers mandatory remediation plan within 14 days.',trigger:'Monthly'},
+    {type:'Performance',lever:'Termination',text:'Active from signing. NTS floor at 30. 30-day cure period.',trigger:'NTS below 30 or monthly miss'},
+  ]},
+};
+function setDBTier(t,btn){dbTier=t;['high','mid','low'].forEach(x=>document.getElementById('db-'+x).classList.toggle('on',x===t));buildDealOutput();}
+function setDBPath(p,btn){dbPath=p;['comm','spec','perf'].forEach((x,i)=>{const keys=['commercial','specification','performance'];document.getElementById('db-'+x).classList.toggle('on',keys[i]===p);});buildDealOutput();}
+function buildDealOutput(){
+  const template=(dealTemplates[dbTier]||{})[dbPath]||dealTemplates[dbTier]?.commercial||[];
+  const tc={high:{col:'#1D9E75',bg:'#E1F5EE',dark:'#085041',label:'High NTS — collaborative, gain-share logic'},mid:{col:'#EF9F27',bg:'#FAEEDA',dark:'#633806',label:'Mid NTS — milestone-led, trajectory-anchored'},low:{col:'#D85A30',bg:'#FAECE7',dark:'#712B13',label:'Low NTS — hard obligations from day one'}};
+  const t=tc[dbTier];
+  const pC={Commercial:{col:'#0F6E56',bg:'#E1F5EE'},Specification:{col:'#534AB7',bg:'#EEEDFE'},Performance:{col:'#854F0B',bg:'#FAEEDA'},Certification:{col:'#185FA5',bg:'#E6F1FB'}};
+  document.getElementById('deal-output').innerHTML=`
+    <div style="padding:10px 14px;background:${t.bg};border-radius:8px;border:1px solid ${t.col};margin-bottom:12px;font-size:13px;font-weight:600;color:${t.dark};">${t.label}</div>
+    <div style="border:1px solid #E0DED8;border-radius:10px;overflow:hidden;">
+      ${template.map(r=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid #F1EFE8;">
+        <div style="width:130px;flex-shrink:0;"><span class="badge" style="background:${(pC[r.type]||pC.Commercial).bg};color:${(pC[r.type]||pC.Commercial).col};">${r.type}</span><div style="font-size:11px;color:#999;margin-top:3px;">${r.lever}</div></div>
+        <div style="flex:1;"><div style="font-size:12px;color:#1A1A1A;line-height:1.5;">${r.text}</div><div style="font-size:11px;color:#999;margin-top:3px;">Trigger: ${r.trigger}</div></div>
+      </div>`).join('')}
+    </div>`;
+}
+
+function buildNegClauses(){
+  const clauses=[
+    {label:'Price adjustment',text:'"The day rate shall be subject to an annual carbon adjustment of −2% for each 5 NTS points gained, verified against the NTS refresh methodology agreed in Schedule [A]. Adjustments are capped at −6% over the contract life. Where NTS falls below 53, a surcharge of 2% shall apply from the subsequent contract year."'},
+    {label:'Volume commitment',text:'"The buyer commits to a minimum annual spend of £2.1m subject to the supplier meeting the quarterly carbon trajectory set out in Schedule [B]. Where the trajectory is missed for two consecutive quarters, the minimum spend commitment is suspended and the buyer may reallocate work to alternative suppliers without restriction or penalty."'},
+    {label:'Travel carbon data return',text:'"The supplier shall provide, as part of each invoice, a disaggregated carbon data return covering: total business travel emissions (tCO2e) by mode for the billing period; cumulative year-to-date travel emissions; and cumulative emissions against the agreed annual trajectory. Emissions shall be calculated using DEFRA conversion factors."'},
+    {label:'Termination right',text:'"Where the Net Transition Score falls below 48 for two consecutive quarterly reviews, the buyer shall have the right to terminate this agreement with 60 days\' notice. During the cure period, the buyer may commence a competitive sourcing process and allocate up to 50% of contract work to alternative suppliers without restriction."'},
+  ];
+  document.getElementById('neg-clauses').innerHTML=clauses.map(c=>`<div class="clause-box"><div class="clause-label">${c.label}</div><div class="clause-text">${c.text}</div></div>`).join('');
+}
+
+// ── SPM ──
+let spmDone=false,spmChart=null;
+function initSPM(){
+  if(spmDone) return; spmDone=true;
+  buildSPMCatChart();
+  buildSPMLevers();
+  buildDataLoop();
+}
+function buildSPMCatChart(){
+  const ctx=document.getElementById('spm-cat-chart');
+  spmChart=new Chart(ctx,{type:'bar',data:{labels:['Apex Advisory','BrightPath','Meridian','Strata Partners','Legacy Consulting'],datasets:[
+    {label:'At signing',data:[71,67,58,43,24],backgroundColor:'rgba(180,178,169,0.45)',borderColor:'#B4B2A9',borderWidth:1,borderRadius:3},
+    {label:'Month 18',data:[74,70,63,47,26],backgroundColor:['#1D9E75cc','#1D9E75cc','#EF9F27cc','#EF9F27cc','#D85A30cc'],borderColor:['#1D9E75','#1D9E75','#EF9F27','#EF9F27','#D85A30'],borderWidth:1.5,borderRadius:3},
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:11}},grid:{display:false}},y:{min:0,max:85,ticks:{font:{size:11}},grid:{color:'rgba(0,0,0,0.05)'}}}}});
+  document.getElementById('spm-cat-leg').innerHTML=`<span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:rgba(180,178,169,0.5);border:1px solid #B4B2A9;display:inline-block;"></span>At signing</span><span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#1D9E75;display:inline-block;"></span>Month 18 — leading</span><span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#EF9F27;display:inline-block;"></span>Month 18 — developing</span><span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#D85A30;display:inline-block;"></span>Month 18 — at risk</span><span style="font-size:11px;color:#999;">Avg: 52.6 → 56.0</span>`;
+}
+function buildSPMLevers(){
+  const comm=[
+    {status:'Active',sf:'#FAECE7',sc:'#712B13',name:'Withhold price adjustment (−2% day rate)',when:'Release: verified 60% air travel reduction evidence'},
+    {status:'Active',sf:'#FAECE7',sc:'#712B13',name:'Demand remediation plan',when:'Due 16 April 2026. Non-submission = material breach'},
+    {status:'Active',sf:'#FAECE7',sc:'#712B13',name:'ISO 14001 breach notice',when:'Separate from travel trigger. Issue immediately.'},
+    {status:'Available',sf:'#FAEEDA',sc:'#633806',name:'Suspend volume commitment',when:'One more quarterly miss activates this'},
+    {status:'Available',sf:'#FAEEDA',sc:'#633806',name:'Parallel sourcing during cure period',when:'Permitted — not yet activated'},
+  ];
+  const perf=[
+    {status:'Available',sf:'#FAEEDA',sc:'#633806',name:'Exercise independent audit rights on Q4 travel data',when:'Buyer discretion — methodology is disputed'},
+    {status:'Due M24',sf:'#E1F5EE',sc:'#085041',name:'Share annual category benchmarking',when:'BrightPath closing on good threshold — market evidence'},
+    {status:'Backstop',sf:'#F1EFE8',sc:'#5F5E5A',name:'Termination right — NTS floor 48, 60-day notice',when:'After day 90 if cure period fails'},
+  ];
+  const renderLevers=(arr,id)=>{document.getElementById(id).innerHTML=`<div style="border:1px solid #E0DED8;border-radius:10px;overflow:hidden;">${arr.map(l=>`<div class="lever-row" style="padding:9px 14px;"><span class="badge" style="background:${l.sf};color:${l.sc};flex-shrink:0;min-width:58px;text-align:center;">${l.status}</span><div><div class="lever-text">${l.name}</div><div class="lever-when">${l.when}</div></div></div>`).join('')}</div>`;};
+  renderLevers(comm,'spm-levers-comm');
+  renderLevers(perf,'spm-levers-perf');
+}
+function buildDataLoop(){
+  const flows=[
+    {title:'Buyer-pulled — scheduled refresh from external sources',bg:'#E1F5EE',dot:'#1D9E75',tc:'#085041',rows:[
+      {label:'SBTi targets database',val:'Near-term submission confirmed. Ambition score moves from estimated to verified.',src:'Verified',sf:'#E1F5EE',sc:'#085041'},
+      {label:'TPI company assessment',val:'Management quality updated to level 3. Actionability component improved.',src:'Verified',sf:'#E1F5EE',sc:'#085041'},
+      {label:'CDP supply chain pull',val:'Band C response received. Partially anchors RE score — removes some estimation.',src:'Partial',sf:'#FAEEDA',sc:'#633806'},
+      {label:'Ember grid intensity',val:'UK office grid intensity updated quarterly. Minor Context score adjustment.',src:'Live',sf:'#E1F5EE',sc:'#085041'},
+    ]},
+    {title:'Supplier-pushed — voluntary updates and corrections',bg:'#FAEEDA',dot:'#EF9F27',tc:'#633806',rows:[
+      {label:'Travel carbon data return',val:'Q1–Q3 returns accepted. Q4 return disputed — different DEFRA conversion factors used.',src:'Disputed',sf:'#FAECE7',sc:'#712B13'},
+      {label:'Remote working update',val:'Confirmed delivery hours increased from 45% to 62% remote. Minor Progress improvement.',src:'Accepted',sf:'#E1F5EE',sc:'#085041'},
+      {label:'REGO certificates',val:'Claims 65% renewable energy at delivery offices. Certificates not yet submitted.',src:'Pending',sf:'#FAEEDA',sc:'#633806'},
+      {label:'Team structure update',val:'80% of billable team now within 50 miles of delivery location. Specification met.',src:'Accepted',sf:'#E1F5EE',sc:'#085041'},
+    ]},
+    {title:'Live connected — API integrations where available',bg:'#E6F1FB',dot:'#378ADD',tc:'#0C447C',rows:[
+      {label:'HR system — team location',val:'Headcount and location data via quarterly export. Verifies local team compliance.',src:'Connected',sf:'#E6F1FB',sc:'#0C447C'},
+      {label:'Expense system API',val:'Not connected. Would replace disputed Q4 methodology with actuals. Priority ask in remediation plan.',src:'Not connected',sf:'#F1EFE8',sc:'#5F5E5A'},
+      {label:'Building energy monitoring',val:'Not connected. Would verify renewable claim in near real-time.',src:'Not connected',sf:'#F1EFE8',sc:'#5F5E5A'},
+    ]},
+  ];
+  document.getElementById('data-loop').innerHTML=flows.map(f=>`
+    <div style="border:1px solid #E0DED8;border-radius:10px;overflow:hidden;margin-bottom:10px;">
+      <div style="padding:10px 14px;background:${f.bg};border-bottom:1px solid #E0DED8;display:flex;align-items:center;gap:8px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:${f.dot};flex-shrink:0;"></span>
+        <span style="font-size:13px;font-weight:600;color:${f.tc};">${f.title}</span>
+      </div>
+      ${f.rows.map(r=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 14px;border-bottom:1px solid #F1EFE8;font-size:12px;"><div style="color:#666;width:160px;flex-shrink:0;">${r.label}</div><div style="color:#1A1A1A;flex:1;line-height:1.4;">${r.val}</div><span class="badge" style="background:${r.sf};color:${r.sc};flex-shrink:0;">${r.src}</span></div>`).join('')}
+    </div>`).join('');
+}
+
+// ── SUPPLIER VIEW — initiatives ──
+const inits=[
+  {icon:'S',bg:'#E1F5EE',ic:'#085041',bc:'#9FE1CB',name:'SBTi',status:'Near-term target submitted month 11. 1.5°C pathway. Validation pending Q3 2026.',badge:'Submitted',bf:'#E1F5EE',bfc:'#085041'},
+  {icon:'C',bg:'#FAEEDA',ic:'#633806',bc:'#FAC775',name:'CDP',status:'Band C submitted 2024. Full Band B+ response requested by Q2 2026.',badge:'Band C — partial',bf:'#FAEEDA',bfc:'#633806'},
+  {icon:'R',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'RE100',status:'Not a member. Office energy 65% renewable. Membership would lift RE score est. 8–12 pts.',badge:'Not joined',bf:'#F1EFE8',bfc:'#5F5E5A'},
+  {icon:'E',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'Energize',status:'Not a member. Relevant for Scope 2. Joining supports renewable procurement.',badge:'Not joined',bf:'#F1EFE8',bfc:'#5F5E5A'},
+  {icon:'T',bg:'#E1F5EE',ic:'#085041',bc:'#9FE1CB',name:'TPI',status:'Management quality level 3 (integrating). Carbon performance on 2°C pathway. Last assessed Q4 2025.',badge:'Level 3',bf:'#E1F5EE',bfc:'#085041'},
+  {icon:'G',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'GHG Protocol',status:'Scope 1 and 2 in place. Scope 3 partial — travel included, supply chain excluded.',badge:'Partial — Scope 3 gap',bf:'#FAEEDA',bfc:'#633806'},
+  {icon:'I',bg:'#FAECE7',ic:'#712B13',bc:'#F5C4B3',name:'ISO 14001',status:'Not certified. Due month 18 — now overdue. Separate breach notice required.',badge:'Overdue',bf:'#FAECE7',bfc:'#712B13'},
+  {icon:'U',bg:'#E6F1FB',ic:'#0C447C',bc:'#B5D4F4',name:'UN Global Compact',status:'Signatory since 2021. Annual Communication on Progress submitted.',badge:'Active signatory',bf:'#E6F1FB',bfc:'#0C447C'},
+];
+document.getElementById('initiatives-grid').innerHTML=inits.map(i=>`
+  <div class="init-card" style="border-color:${i.bc};">
+    <div class="init-icon" style="background:${i.bg};color:${i.ic};">${i.icon}</div>
+    <div class="init-name">${i.name}</div>
+    <div class="init-status">${i.status}</div>
+    <span class="badge" style="background:${i.bf};color:${i.bfc};">${i.badge}</span>
+  </div>`).join('');
+</script>
+</body>
+</html>
