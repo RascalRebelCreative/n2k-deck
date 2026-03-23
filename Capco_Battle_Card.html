@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capco — Supplier Battle Card | Need to Know</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F8F8F6;color:#1A1A1A;font-size:14px;line-height:1.5;padding:0;}
+
+/* Top bar */
+#topbar{background:white;border-bottom:1px solid #E0DED8;padding:0 28px;height:50px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+.brand{font-size:14px;font-weight:700;color:#0F6E56;}
+.brand span{color:#1A1A1A;font-weight:400;}
+.topbar-sep{width:1px;height:18px;background:#E0DED8;}
+.topbar-label{font-size:13px;color:#666;}
+.topbar-name{font-size:13px;font-weight:600;color:#1A1A1A;}
+
+/* Layout */
+.page{max-width:1080px;margin:0 auto;padding:28px 24px 48px;}
+
+/* Shared components */
+.badge{font-size:10px;padding:2px 8px;border-radius:3px;font-weight:600;display:inline-block;}
+.section-label{font-size:10px;font-weight:700;color:#0F6E56;letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px;}
+.card{background:white;border:1px solid #E0DED8;border-radius:10px;padding:14px 18px;margin-bottom:14px;}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.mc{background:#F8F8F6;border-radius:8px;padding:11px 13px;}
+.mc .ml{font-size:11px;color:#666;margin-bottom:2px;}
+.mc .mv{font-size:19px;font-weight:700;color:#1A1A1A;}
+.mc .ms{font-size:11px;color:#999;margin-top:2px;}
+.prog-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.prog-label{font-size:12px;color:#666;width:125px;flex-shrink:0;}
+.prog-wrap{flex:1;height:7px;background:#F1EFE8;border-radius:4px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:4px;}
+.prog-val{font-size:12px;font-weight:700;width:30px;text-align:right;flex-shrink:0;}
+.prog-note{font-size:10px;color:#999;width:140px;text-align:right;flex-shrink:0;}
+.peer-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+.peer-name{font-size:13px;color:#666;width:165px;flex-shrink:0;}
+.peer-bar-wrap{flex:1;height:8px;background:#F1EFE8;border-radius:4px;overflow:hidden;}
+.peer-bar{height:100%;border-radius:4px;}
+.peer-val{font-size:13px;font-weight:600;width:115px;text-align:right;flex-shrink:0;}
+.calc-row{display:flex;align-items:baseline;gap:8px;padding:5px 0;border-bottom:1px solid #F1EFE8;font-size:12px;}
+.calc-row:last-child{border-bottom:none;}
+.calc-label{color:#666;width:185px;flex-shrink:0;}
+.calc-val{color:#1A1A1A;font-weight:600;flex:1;}
+.calc-src{font-size:10px;color:#999;margin-left:auto;}
+.action-row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F1EFE8;}
+.action-row:last-child{border-bottom:none;}
+.action-num{width:24px;height:24px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;margin-top:1px;}
+.action-text{font-size:13px;color:#1A1A1A;flex:1;line-height:1.5;}
+.action-due{font-size:11px;color:#999;margin-top:2px;}
+.init-card{border:1px solid #E0DED8;border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:4px;}
+.init-icon{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-bottom:5px;}
+.init-name{font-size:12px;font-weight:600;color:#1A1A1A;}
+.init-status{font-size:11px;color:#666;line-height:1.4;margin-bottom:5px;}
+.qg{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.qc{padding:9px;border-radius:6px;font-size:11px;font-weight:600;text-align:center;line-height:1.3;}
+.insight{background:#E1F5EE;border-radius:8px;padding:11px 14px;}
+.insight p{font-size:12px;color:#085041;line-height:1.6;}
+.est{font-size:9px;padding:1px 5px;border-radius:2px;background:#F1EFE8;color:#999;font-weight:600;margin-left:3px;vertical-align:middle;}
+.status-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div class="brand">Need to <span>Know</span></div>
+  <div class="topbar-sep"></div>
+  <div class="topbar-label">Supplier battle card</div>
+  <div class="topbar-sep"></div>
+  <div class="topbar-name">Capco</div>
+</div>
+
+<div class="page">
+
+  <!-- Source note -->
+  <div style="padding:8px 14px;border-radius:6px;background:white;border:1px solid #E0DED8;margin-bottom:16px;font-size:12px;color:#666;line-height:1.5;">
+    Sources: Capco 2024 Sustainability Report · Capco 2025 Net Zero Commitment · Wipro CDP 2024 disclosure · SBTi target dashboard. Items marked <span class="est">est.</span> are estimated from sector benchmarks where Capco data is not publicly available.
+  </div>
+
+  <!-- Header -->
+  <div style="display:flex;align-items:flex-start;gap:18px;padding:18px;background:white;border-radius:12px;margin-bottom:14px;border:1px solid #E0DED8;">
+    <div style="width:56px;height:56px;border-radius:12px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#085041;flex-shrink:0;">CA</div>
+    <div style="flex:1;">
+      <div style="font-size:20px;font-weight:700;color:#1A1A1A;">Capco</div>
+      <div style="font-size:13px;color:#666;margin-top:3px;">Management & technology consulting · Financial services focus · Owned by Wipro (acquired 2021)</div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+        <span class="badge" style="background:#FAEEDA;color:#633806;">Mid NTS · Coasting quadrant</span>
+        <span class="badge" style="background:#FAEEDA;color:#633806;">SBTi-aligned — not yet validated</span>
+        <span class="badge" style="background:#E1F5EE;color:#085041;">CarbonNeutral® travel certified</span>
+        <span class="badge" style="background:#E1F5EE;color:#085041;">UN Global Compact signatory</span>
+        <span class="badge" style="background:#E6F1FB;color:#0C447C;">Net Zero 2040</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;">
+      <div style="width:70px;height:70px;border-radius:50%;border:3px solid #EF9F27;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <div style="font-size:24px;font-weight:700;color:#EF9F27;line-height:1;">57</div>
+        <div style="font-size:9px;color:#999;">NTS<span class="est">est.</span></div>
+      </div>
+      <div style="font-size:11px;color:#999;text-align:right;">Target: 70 by year 3</div>
+    </div>
+  </div>
+
+  <!-- Scope 3 banner -->
+  <div style="background:white;border:1.5px solid #9FE1CB;border-radius:12px;padding:18px 20px;margin-bottom:14px;display:flex;gap:24px;align-items:flex-start;">
+    <div style="flex:1;">
+      <div style="font-size:10px;font-weight:700;color:#0F6E56;letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px;">Your Scope 3 exposure — Capco spend (Category 1)</div>
+      <div style="font-size:40px;font-weight:700;color:#0F6E56;line-height:1;margin-bottom:6px;">1,836 <span style="font-size:20px;font-weight:500;">tCO2e</span></div>
+      <div style="font-size:12px;color:#0F6E56;margin-bottom:6px;">Spend-based methodology · EEIO sector factor · Management consulting</div>
+      <div style="font-size:13px;color:#444;line-height:1.6;">This is the carbon footprint your organisation is attributing to Capco under your Scope 3 Category 1 reporting. (It is calculated from your spend — not Capco's self-reported figure.)</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;min-width:155px;">
+      <div class="mc"><div class="ml">Methodology</div><div style="font-size:14px;font-weight:600;color:#1A1A1A;">Spend-based</div><div class="ms">EEIO sector factor</div></div>
+      <div class="mc"><div class="ml">Supplier-specific factor</div><div style="font-size:14px;font-weight:600;color:#D85A30;">Not provided</div><div class="ms">Priority data ask</div></div>
+    </div>
+  </div>
+
+  <!-- Why it matters -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;">
+    <div class="card" style="margin-bottom:0;"><div style="font-size:13px;font-weight:600;margin-bottom:5px;">Why the spend-based figure matters</div><div style="font-size:12px;color:#666;line-height:1.6;">1,836t is your reported Scope 3 liability today. It uses a sector average — if Capco's actual intensity is lower, a supplier-specific factor would reduce your reported footprint.</div></div>
+    <div class="card" style="margin-bottom:0;"><div style="font-size:13px;font-weight:600;margin-bottom:5px;">The commercial ask</div><div style="font-size:12px;color:#666;line-height:1.6;">Capco provides a verified, supplier-specific emission factor. If below sector average, it directly reduces your Scope 3. That is their commercial incentive to disclose accurately.</div></div>
+    <div class="card" style="margin-bottom:0;"><div style="font-size:13px;font-weight:600;margin-bottom:5px;">Trajectory implication</div><div style="font-size:12px;color:#666;line-height:1.6;">Your Scope 3 reduction target includes this 1,836t. If Capco's NTS improves and intensity falls, your reported figure falls — without changing the spend. Link this in the contract.</div></div>
+  </div>
+
+  <!-- Key metrics -->
+  <div class="g4">
+    <div class="mc"><div class="ml">Your Scope 3 (Capco)</div><div class="mv" style="color:#0F6E56;">1,836t</div><div class="ms">CO2e · spend-based</div></div>
+    <div class="mc"><div class="ml">Operational intensity<span class="est">est.</span></div><div class="mv">~5.2</div><div class="ms">tCO2e/FTE · above 4.5 good</div></div>
+    <div class="mc"><div class="ml">Travel offset (verified)</div><div class="mv">7,684t</div><div class="ms">CO2e · FY24 · CarbonNeutral®</div></div>
+    <div class="mc"><div class="ml">Net Zero target</div><div class="mv">2040</div><div class="ms">Revised from earlier 2030</div></div>
+  </div>
+
+  <!-- NTS matrix + components -->
+  <div class="cols2">
+
+    <!-- 2x2 matrix -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-label">NTS quadrant position — consulting sector peers</div>
+      <svg width="100%" viewBox="0 0 560 390" xmlns="http://www.w3.org/2000/svg">
+        <rect x="50" y="15" width="215" height="170" fill="#E1F5EE" opacity="0.7"/>
+        <rect x="265" y="15" width="215" height="170" fill="#E1F5EE" opacity="0.4"/>
+        <rect x="50" y="185" width="215" height="170" fill="#FAECE7" opacity="0.7"/>
+        <rect x="265" y="185" width="215" height="170" fill="#FAEEDA" opacity="0.7"/>
+        <text x="157" y="45" text-anchor="middle" font-size="12" font-weight="600" font-family="system-ui,sans-serif" fill="#085041">Ambitious but constrained</text>
+        <text x="157" y="59" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#0F6E56">High delivery · Strong headwinds</text>
+        <text x="372" y="45" text-anchor="middle" font-size="12" font-weight="600" font-family="system-ui,sans-serif" fill="#085041">Leading</text>
+        <text x="372" y="59" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#0F6E56">High delivery · Low tailwinds</text>
+        <text x="157" y="214" text-anchor="middle" font-size="12" font-weight="600" font-family="system-ui,sans-serif" fill="#712B13">At risk</text>
+        <text x="157" y="228" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#993C1D">Low delivery · Strong headwinds</text>
+        <text x="372" y="214" text-anchor="middle" font-size="12" font-weight="600" font-family="system-ui,sans-serif" fill="#633806">Coasting</text>
+        <text x="372" y="228" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#854F0B">Low delivery · Low tailwinds</text>
+        <line x1="265" y1="15" x2="265" y2="355" stroke="#ccc" stroke-width="1" stroke-dasharray="5 3"/>
+        <line x1="50" y1="185" x2="480" y2="185" stroke="#ccc" stroke-width="1" stroke-dasharray="5 3"/>
+        <rect x="50" y="15" width="430" height="340" fill="none" stroke="#E0DED8" stroke-width="0.5"/>
+        <text x="265" y="375" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#999">← Strong headwinds · Context · Low tailwinds →</text>
+        <text x="18" y="185" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#999" transform="rotate(-90 18 185)">← Low · Ambition &amp; delivery · High →</text>
+        <!-- Peers unlabelled -->
+        <circle cx="370" cy="45" r="10" fill="#B4B2A9" opacity="0.55"/>
+        <circle cx="408" cy="68" r="9" fill="#B4B2A9" opacity="0.5"/>
+        <circle cx="442" cy="90" r="8" fill="#B4B2A9" opacity="0.5"/>
+        <circle cx="352" cy="102" r="8" fill="#B4B2A9" opacity="0.45"/>
+        <circle cx="112" cy="52" r="9" fill="#B4B2A9" opacity="0.5"/>
+        <circle cx="155" cy="76" r="8" fill="#B4B2A9" opacity="0.5"/>
+        <circle cx="87" cy="100" r="7" fill="#B4B2A9" opacity="0.45"/>
+        <circle cx="322" cy="255" r="9" fill="#B4B2A9" opacity="0.5"/>
+        <circle cx="406" cy="285" r="8" fill="#B4B2A9" opacity="0.45"/>
+        <circle cx="448" cy="242" r="7" fill="#B4B2A9" opacity="0.4"/>
+        <circle cx="96" cy="262" r="8" fill="#B4B2A9" opacity="0.45"/>
+        <circle cx="142" cy="308" r="7" fill="#B4B2A9" opacity="0.4"/>
+        <!-- Capco -->
+        <circle cx="298" cy="238" r="15" fill="#EF9F27" opacity="0.92" stroke="white" stroke-width="2"/>
+        <text x="318" y="232" font-size="12" font-weight="700" font-family="system-ui,sans-serif" fill="#633806">Capco</text>
+        <text x="318" y="246" font-size="10" font-family="system-ui,sans-serif" fill="#854F0B">NTS ~57 est.</text>
+        <!-- Legend -->
+        <circle cx="60" cy="368" r="7" fill="#EF9F27"/>
+        <text x="73" y="372" font-size="10" font-family="system-ui,sans-serif" fill="#633806">Capco (NTS ~57, estimated)</text>
+        <circle cx="250" cy="368" r="7" fill="#B4B2A9" opacity="0.55"/>
+        <text x="263" y="372" font-size="10" font-family="system-ui,sans-serif" fill="#666">Sector peers — unlabelled</text>
+      </svg>
+      <div style="font-size:11px;color:#999;margin-top:6px;line-height:1.4;">Peer positions estimated from public SBTi, CDP, and TPI data. Unlabelled to preserve confidentiality in supplier conversations.</div>
+    </div>
+
+    <!-- NTS components + calculation -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-label">NTS components <em style="font-size:10px;color:#999;text-transform:none;letter-spacing:0;">estimated from public disclosure</em></div>
+      <div class="prog-row"><div class="prog-label">Ambition</div><div class="prog-wrap"><div class="prog-fill" style="width:68%;background:#EF9F27;"></div></div><div class="prog-val" style="color:#EF9F27;">68</div><div class="prog-note">SBTi aligned, unvalidated</div></div>
+      <div class="prog-row"><div class="prog-label">Progress</div><div class="prog-wrap"><div class="prog-fill" style="width:52%;background:#EF9F27;"></div></div><div class="prog-val" style="color:#EF9F27;">52</div><div class="prog-note">Travel certified ✓</div></div>
+      <div class="prog-row"><div class="prog-label">Context</div><div class="prog-wrap"><div class="prog-fill" style="width:72%;background:#1D9E75;"></div></div><div class="prog-val" style="color:#1D9E75;">72</div><div class="prog-note">Low headwinds</div></div>
+      <div class="prog-row"><div class="prog-label">Renewable energy</div><div class="prog-wrap"><div class="prog-fill" style="width:38%;background:#D85A30;"></div></div><div class="prog-val" style="color:#D85A30;">38</div><div class="prog-note">No RE100 confirmed</div></div>
+      <div class="prog-row" style="margin-bottom:14px;"><div class="prog-label">Actionability</div><div class="prog-wrap"><div class="prog-fill" style="width:54%;background:#EF9F27;"></div></div><div class="prog-val" style="color:#EF9F27;">54</div><div class="prog-note">UNGC + CEO commitment</div></div>
+
+      <div style="border-top:1px solid #E0DED8;padding-top:13px;">
+        <div class="section-label">Intensity calculation — data sources</div>
+        <table style="width:100%;font-size:12px;border-collapse:collapse;">
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Travel emissions (verified)</td><td style="padding:5px 0;font-weight:600;">7,684 tCO2e</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">Capco 2024 Sustainability Report</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Global headcount <span class="est">est.</span></td><td style="padding:5px 0;font-weight:600;">~6,500 FTE</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">Capco website / Wipro 2024 AR</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Travel intensity</td><td style="padding:5px 0;font-weight:600;">~1.18 tCO2e/FTE</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">7,684 ÷ 6,500</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Office energy <span class="est">est.</span></td><td style="padding:5px 0;font-weight:600;">~2.5 tCO2e/FTE</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">GHG Protocol PS guidance; Wipro CDP 2024</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Other Scope 1+2 <span class="est">est.</span></td><td style="padding:5px 0;font-weight:600;">~1.5 tCO2e/FTE</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">CDP PS sector avg 2023</td></tr>
+          <tr style="border-top:2px solid #E0DED8;"><td style="padding:6px 0;font-weight:700;">Total intensity est.</td><td style="padding:6px 0;font-weight:700;color:#EF9F27;">~5.2 tCO2e/FTE</td><td style="padding:6px 0;font-size:10px;color:#999;text-align:right;">Travel part-verified · rest estimated</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Your Scope 3 (spend-based)</td><td style="padding:5px 0;font-weight:600;color:#0F6E56;">1,836 tCO2e</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">Spend × EEIO mgmt. consulting factor</td></tr>
+          <tr><td style="padding:5px 0;color:#666;">Implied spend intensity</td><td style="padding:5px 0;font-weight:600;">~0.28 tCO2e/FTE</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">1,836 ÷ 6,500 — EEIO, not operational</td></tr>
+        </table>
+        <div style="font-size:11px;color:#999;margin-top:8px;line-height:1.5;font-style:italic;">The spend-based (~0.28/FTE) and operational estimate (~5.2/FTE) measure different things. A supplier-specific emission factor from Capco would replace both with a single verified figure.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carbon intensity benchmark -->
+  <div class="card">
+    <div class="section-label">Carbon intensity — operational benchmark vs industry (tCO2e per FTE)</div>
+
+    <div style="position:relative;margin-top:32px;margin-bottom:56px;">
+      <div style="height:30px;border-radius:7px;overflow:hidden;position:relative;">
+        <div style="position:absolute;left:0;width:25%;height:100%;background:#FAECE7;"></div>
+        <div style="position:absolute;left:25%;width:30%;height:100%;background:#FAEEDA;"></div>
+        <div style="position:absolute;left:55%;width:38%;height:100%;background:#E1F5EE;"></div>
+        <div style="position:absolute;left:93%;width:7%;height:100%;background:#085041;"></div>
+        <div style="position:absolute;left:55%;top:0;width:2.5px;height:100%;background:#0F6E56;z-index:2;"></div>
+      </div>
+      <div style="position:absolute;left:55%;top:-26px;transform:translateX(-50%);font-size:11px;background:#0F6E56;color:white;padding:2px 9px;border-radius:3px;white-space:nowrap;font-weight:700;">Good threshold: 4.5 tCO2e/FTE</div>
+      <div style="position:absolute;left:37%;top:-26px;transform:translateX(-50%);text-align:center;">
+        <div style="font-size:10px;color:#999;white-space:nowrap;">Sector avg 6.2</div>
+        <div style="width:1px;height:36px;background:#ccc;margin:0 auto;"></div>
+      </div>
+      <div style="position:absolute;left:32%;top:50%;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:#EF9F27;border:3px solid white;box-shadow:0 0 0 1.5px #EF9F27;z-index:3;"></div>
+      <div style="position:absolute;left:32%;top:34px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;">
+        <div style="width:1.5px;height:9px;background:#EF9F27;"></div>
+        <div style="font-size:11px;font-weight:700;color:#633806;white-space:nowrap;background:#FAEEDA;padding:2px 8px;border-radius:3px;border:1px solid #FAC775;">Capco ~5.2 tCO2e/FTE <span class="est">est.</span></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:9px;">
+        <span style="font-size:11px;color:#D85A30;font-weight:600;">Worst: 18 tCO2e/FTE</span>
+        <span style="font-size:11px;color:#085041;font-weight:600;">Best in class: 0.5 tCO2e/FTE</span>
+      </div>
+    </div>
+
+    <!-- Zone legend -->
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:16px;">
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:11px;height:11px;border-radius:2px;background:#FAECE7;border:1px solid #D85A30;display:inline-block;"></span>Needs work (&gt;8)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:11px;height:11px;border-radius:2px;background:#FAEEDA;border:1px solid #EF9F27;display:inline-block;"></span>Developing (4.5–8)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:11px;height:11px;border-radius:2px;background:#E1F5EE;border:1px solid #1D9E75;display:inline-block;"></span>Good (≤4.5)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:11px;height:11px;border-radius:2px;background:#085041;display:inline-block;"></span>Best in class (≤1.0)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;margin-left:auto;"><span style="width:16px;height:2.5px;background:#0F6E56;display:inline-block;border-radius:1px;"></span>Good threshold</span>
+    </div>
+
+    <!-- Peer rows -->
+    <div style="border-top:1px solid #E0DED8;padding-top:14px;">
+      <div class="section-label">Peer comparison — management consulting (unlabelled)</div>
+
+      <div class="peer-row">
+        <div style="width:9px;height:9px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></div>
+        <div class="peer-name">Peer A — leading</div>
+        <div class="peer-bar-wrap"><div class="peer-bar" style="width:10%;background:#1D9E75;"></div></div>
+        <div class="peer-val" style="color:#1D9E75;">~1.8 tCO2e/FTE</div>
+        <span class="badge" style="background:#E1F5EE;color:#085041;min-width:80px;text-align:center;">Leading</span>
+      </div>
+
+      <div class="peer-row">
+        <div style="width:9px;height:9px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></div>
+        <div class="peer-name">Peer B — good</div>
+        <div class="peer-bar-wrap"><div class="peer-bar" style="width:22%;background:#1D9E75;"></div></div>
+        <div class="peer-val" style="color:#1D9E75;">~3.9 tCO2e/FTE</div>
+        <span class="badge" style="background:#E1F5EE;color:#085041;min-width:80px;text-align:center;">Good</span>
+      </div>
+
+      <div class="peer-row" style="padding:5px 9px;border-radius:7px;background:#FAEEDA;border:1px solid #FAC775;">
+        <div style="width:9px;height:9px;border-radius:50%;background:#EF9F27;flex-shrink:0;"></div>
+        <div class="peer-name" style="font-weight:700;color:#633806;">Capco <span class="est">est.</span></div>
+        <div class="peer-bar-wrap" style="background:#FAC775;"><div class="peer-bar" style="width:32%;background:#EF9F27;"></div></div>
+        <div class="peer-val" style="color:#EF9F27;font-weight:700;">~5.2 tCO2e/FTE</div>
+        <span class="badge" style="background:#FAEEDA;color:#633806;min-width:80px;text-align:center;">Below good</span>
+      </div>
+
+      <div class="peer-row">
+        <div style="width:9px;height:9px;border-radius:50%;background:#D85A30;flex-shrink:0;"></div>
+        <div class="peer-name">Peer C — developing</div>
+        <div class="peer-bar-wrap"><div class="peer-bar" style="width:50%;background:#D85A30;"></div></div>
+        <div class="peer-val" style="color:#D85A30;">~8.8 tCO2e/FTE</div>
+        <span class="badge" style="background:#FAECE7;color:#712B13;min-width:80px;text-align:center;">At risk</span>
+      </div>
+
+      <div class="peer-row">
+        <div style="width:9px;height:9px;border-radius:50%;background:#D85A30;flex-shrink:0;"></div>
+        <div class="peer-name">Peer D — laggard</div>
+        <div class="peer-bar-wrap"><div class="peer-bar" style="width:74%;background:#D85A30;"></div></div>
+        <div class="peer-val" style="color:#D85A30;">~13.2 tCO2e/FTE</div>
+        <span class="badge" style="background:#FAECE7;color:#712B13;min-width:80px;text-align:center;">At risk</span>
+      </div>
+
+      <div class="insight" style="margin-top:12px;">
+        <p>Capco sits above the sector average (6.2) and below the good threshold (4.5). The gap to good is <strong>~0.7 tCO2e/FTE</strong> — achievable through RE100 membership and stricter travel reduction. Peer A demonstrates what remote-first delivery combined with 100% renewable office energy delivers.</p>
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:8px;font-style:italic;">Peer intensities estimated from CDP disclosures, sustainability reports, and sector benchmarks. Unlabelled to preserve confidentiality in supplier conversations.</div>
+    </div>
+  </div>
+
+  <!-- Initiatives -->
+  <div class="card">
+    <div class="section-label">Sustainability initiatives and programmes</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;" id="capco-inits"></div>
+    <div style="padding-top:12px;border-top:1px solid #E0DED8;">
+      <div style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:8px;">Key gaps with direct NTS and Scope 3 impact</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span class="badge" style="background:#FAECE7;color:#712B13;">No supplier-specific emission factor — 1,836t uses sector average</span>
+        <span class="badge" style="background:#FAECE7;color:#712B13;">RE100 — est. +10–15 pts on NTS RE score</span>
+        <span class="badge" style="background:#FAECE7;color:#712B13;">SBTi validation — Ambition score upgrade on confirmation</span>
+        <span class="badge" style="background:#FAEEDA;color:#633806;">Standalone CDP — anchors RE and Progress, removes estimation discount</span>
+        <span class="badge" style="background:#FAEEDA;color:#633806;">Per-FTE emissions disclosure — moves Scope 3 beyond spend-based</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Engagement + Actions -->
+  <div class="cols2">
+
+    <div class="card" style="margin-bottom:0;border-color:#FAC775;border-width:1.5px;">
+      <div class="section-label" style="color:#854F0B;">Engagement framing</div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:7px;">Strengths to acknowledge</div>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px;">
+        <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#1D9E75;flex-shrink:0;font-size:14px;">✓</span>CEO-level Net Zero 2040 — public commitment, not just policy</div>
+        <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#1D9E75;flex-shrink:0;font-size:14px;">✓</span>CarbonNeutral® travel certified — two years running</div>
+        <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#1D9E75;flex-shrink:0;font-size:14px;">✓</span>SBTi-aligned targets set in 2025 — real target-setting work done</div>
+        <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#1D9E75;flex-shrink:0;font-size:14px;">✓</span>Parent Wipro fully credentialled — all tools and roadmap exist</div>
+      </div>
+      <div style="border-top:1px solid #E0DED8;padding-top:12px;">
+        <div style="font-size:13px;font-weight:600;margin-bottom:7px;">The Coasting challenge</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#D85A30;flex-shrink:0;">▲</span>SBTi aligned but unvalidated — Ambition score penalised until confirmed</div>
+          <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#D85A30;flex-shrink:0;">▲</span>Net Zero target moved 2030→2040 — requires explanation</div>
+          <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#D85A30;flex-shrink:0;">▲</span>No standalone CDP — all NTS components partially estimated</div>
+          <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#D85A30;flex-shrink:0;">▲</span>Parent has RE100, SBTi, ISO 14001 — Capco entity does not</div>
+          <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#D85A30;flex-shrink:0;">▲</span>CI above good threshold — 0.7 tCO2e/FTE gap to close</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #E0DED8;">
+        <div style="font-size:13px;font-weight:600;margin-bottom:7px;">NTS quadrant position</div>
+        <div class="qg">
+          <div class="qc" style="background:#F1EFE8;color:#999;opacity:0.5;">Ambitious but constrained</div>
+          <div class="qc" style="background:#F1EFE8;color:#999;opacity:0.5;">Leading</div>
+          <div class="qc" style="background:#F1EFE8;color:#999;opacity:0.5;">At risk</div>
+          <div class="qc" style="background:#FAEEDA;color:#633806;border:2px solid #EF9F27;">Coasting ←</div>
+        </div>
+        <div style="font-size:12px;color:#666;margin-top:8px;line-height:1.5;">Low headwinds. Parent fully credentialled. The gap between Wipro's credentials and Capco's entity-level performance is the commercial lever.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-label">Recommended actions</div>
+      <div class="action-row"><div class="action-num">1</div><div><div class="action-text">Request supplier-specific emission factor — replaces the 1,836t spend-based sector average. Direct commercial incentive for Capco to disclose accurately: if their actual intensity is below sector average, your Scope 3 figure falls.</div><div class="action-due">At contract signature — include in data compact</div></div></div>
+      <div class="action-row"><div class="action-num">2</div><div><div class="action-text">Require standalone CDP disclosure at Band C+ — currently only available via Wipro parent, which limits the defensibility of every NTS component and the Scope 3 attribution.</div><div class="action-due">Within 90 days of signature</div></div></div>
+      <div class="action-row"><div class="action-num">3</div><div><div class="action-text">SBTi validation as milestone payment trigger — targets are aligned but unvalidated. Validation achievable within 12–18 months. Direct Ambition score upgrade on confirmation.</div><div class="action-due">Milestone payment at month 18</div></div></div>
+      <div class="action-row"><div class="action-num">4</div><div><div class="action-text">Push RE100 at Capco entity level — Wipro is already RE100, so the parent infrastructure exists. Single highest-impact NTS RE score move, and closes the 0.7 tCO2e/FTE gap to the good threshold.</div><div class="action-due">Year 1 commitment, year 2 delivery</div></div></div>
+      <div class="action-row"><div class="action-num">5</div><div><div class="action-text">Raise 2030→2040 Net Zero target change in first review — acknowledge CarbonNeutral® certification as positive, but require 2030 interim milestones and explanation of what changed in the roadmap.</div><div class="action-due">First supplier review meeting</div></div></div>
+      <div class="action-row"><div class="action-num" style="background:#E0DED8;color:#666;">6</div><div><div class="action-text" style="color:#999;">If supplier-specific factor confirms intensity below sector average — update Scope 3 reporting and release part of the carbon-linked price adjustment accordingly.</div><div class="action-due">Contingent on data delivery</div></div></div>
+    </div>
+
+  </div>
+
+  <!-- Data status -->
+  <div class="card" style="margin-top:14px;">
+    <div class="section-label">Data status</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#1D9E75;"></span>Net Zero 2040 — public commitment</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#1D9E75;"></span>CarbonNeutral® travel — verified FY24</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#1D9E75;"></span>UN Global Compact — active signatory</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#0F6E56;"></span>Your Scope 3 — 1,836t spend-based</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#EF9F27;"></span>SBTi — aligned, not yet validated</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#EF9F27;"></span>CDP — via Wipro parent only</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#888;"></span>Supplier-specific emission factor — not provided</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#888;"></span>Per-FTE operational emissions — not publicly reported</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#888;"></span>RE100 — not confirmed at Capco entity level</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#E6F1FB;border:1px solid #378ADD;"></span>Wipro parent — RE100, CDP A-list, SBTi validated, ISO 14001</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const inits=[
+  {icon:'S',bg:'#FAEEDA',ic:'#633806',bc:'#FAC775',name:'SBTi',txt:'Set 2025 with Climate Impact Partners. Scope 1+2+3 reductions to 2030. FY24 baseline. NZS v2.0 aligned. Not yet on SBTi target dashboard.',badge:'Aligned — unvalidated',bf:'#FAEEDA',bfc:'#633806'},
+  {icon:'C',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'CDP',txt:'No standalone Capco submission confirmed. Disclosed under Wipro parent. Limits NTS score anchoring — RE and Progress carry estimation discount throughout.',badge:'Via Wipro parent only',bf:'#F1EFE8',bfc:'#5F5E5A'},
+  {icon:'CN',bg:'#E1F5EE',ic:'#085041',bc:'#9FE1CB',name:'CarbonNeutral®',txt:'Certified for business travel — second consecutive year. 7,684 high-quality carbon credits purchased FY24. Verified by Climate Impact Partners. Covers travel only.',badge:'Certified — yr 2',bf:'#E1F5EE',bfc:'#085041'},
+  {icon:'U',bg:'#E1F5EE',ic:'#085041',bc:'#9FE1CB',name:'UN Global Compact',txt:'Active signatory. CEO Anne-Marie Rowland personally reaffirmed commitment in 2025. Annual Communication on Progress submitted.',badge:'Active signatory',bf:'#E1F5EE',bfc:'#085041'},
+  {icon:'R',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'RE100',txt:'Not confirmed at Capco entity level. Wipro is RE100. Joining at entity level would add an estimated 10–15 points to the NTS RE score — the single highest-impact move available.',badge:'Not confirmed',bf:'#F1EFE8',bfc:'#5F5E5A'},
+  {icon:'I',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'ISO 14001',txt:'Not confirmed in Capco public disclosure. Wipro holds ISO 14001 at corporate level. Subsidiary status unclear — requires direct confirmation from Capco.',badge:'Not confirmed',bf:'#F1EFE8',bfc:'#5F5E5A'},
+  {icon:'W',bg:'#E6F1FB',ic:'#0C447C',bc:'#B5D4F4',name:'Wipro parent',txt:'SBTi validated (Scope 1+2 −48% by 2030; Scope 3 −30% by 2030 from 2017 base), RE100 member, CDP A-list, ISO 14001. Parent has all the tools — Capco entity is the gap.',badge:'Parent fully credentialled',bf:'#E6F1FB',bfc:'#0C447C'},
+  {icon:'G',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'GHG Protocol',txt:'Scope 1+2 inventory implied by sustainability report. Scope 3 travel included via CarbonNeutral® certification. Full Scope 3 inventory and assurance level not confirmed.',badge:'Partial — assurance unclear',bf:'#FAEEDA',bfc:'#633806'},
+];
+document.getElementById('capco-inits').innerHTML=inits.map(i=>`
+  <div style="border:1px solid ${i.bc};border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:4px;background:white;">
+    <div style="width:30px;height:30px;border-radius:6px;background:${i.bg};color:${i.ic};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:5px;">${i.icon}</div>
+    <div style="font-size:12px;font-weight:700;color:#1A1A1A;">${i.name}</div>
+    <div style="font-size:11px;color:#666;line-height:1.5;margin-bottom:6px;">${i.txt}</div>
+    <span style="font-size:10px;padding:2px 7px;border-radius:3px;font-weight:700;background:${i.bf};color:${i.bfc};align-self:flex-start;">${i.badge}</span>
+  </div>`).join('');
+</script>
+</body>
+</html>
