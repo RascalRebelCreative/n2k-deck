@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBRE — Supplier Battle Card | Need to Know</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F8F8F6;color:#1A1A1A;font-size:14px;line-height:1.5;padding:0;}
+#topbar{background:white;border-bottom:1px solid #E0DED8;padding:0 28px;height:50px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+.brand{font-size:14px;font-weight:700;color:#0F6E56;}
+.brand span{color:#1A1A1A;font-weight:400;}
+.topbar-sep{width:1px;height:18px;background:#E0DED8;}
+.topbar-label{font-size:13px;color:#666;}
+.topbar-name{font-size:13px;font-weight:600;color:#1A1A1A;}
+.page{max-width:1080px;margin:0 auto;padding:28px 24px 48px;}
+.badge{font-size:10px;padding:2px 8px;border-radius:3px;font-weight:600;display:inline-block;}
+.section-label{font-size:10px;font-weight:700;color:#0F6E56;letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px;}
+.card{background:white;border:1px solid #E0DED8;border-radius:10px;padding:14px 18px;margin-bottom:14px;}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.mc{background:#F8F8F6;border-radius:8px;padding:11px 13px;}
+.mc .ml{font-size:11px;color:#666;margin-bottom:2px;}
+.mc .mv{font-size:19px;font-weight:700;color:#1A1A1A;}
+.mc .ms{font-size:11px;color:#999;margin-top:2px;}
+.prog-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.prog-label{font-size:12px;color:#666;width:125px;flex-shrink:0;}
+.prog-wrap{flex:1;height:7px;background:#F1EFE8;border-radius:4px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:4px;}
+.prog-val{font-size:12px;font-weight:700;width:30px;text-align:right;flex-shrink:0;}
+.prog-note{font-size:10px;color:#999;width:150px;text-align:right;flex-shrink:0;}
+.peer-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+.peer-name{font-size:13px;color:#666;width:165px;flex-shrink:0;}
+.peer-bar-wrap{flex:1;height:8px;background:#F1EFE8;border-radius:4px;overflow:hidden;}
+.peer-bar{height:100%;border-radius:4px;}
+.peer-val{font-size:13px;font-weight:600;width:115px;text-align:right;flex-shrink:0;}
+.calc-row{display:flex;align-items:baseline;gap:8px;padding:5px 0;border-bottom:1px solid #F1EFE8;font-size:12px;}
+.calc-row:last-child{border-bottom:none;}
+.calc-label{color:#666;width:195px;flex-shrink:0;}
+.calc-val{color:#1A1A1A;font-weight:600;flex:1;}
+.calc-src{font-size:10px;color:#999;margin-left:auto;}
+.action-row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #F1EFE8;}
+.action-row:last-child{border-bottom:none;}
+.action-num{width:24px;height:24px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;margin-top:1px;}
+.action-text{font-size:13px;color:#1A1A1A;flex:1;line-height:1.5;}
+.action-due{font-size:11px;color:#999;margin-top:2px;}
+.init-card{border:1px solid #E0DED8;border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:4px;background:white;}
+.init-icon{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:5px;}
+.init-name{font-size:12px;font-weight:700;color:#1A1A1A;}
+.init-status{font-size:11px;color:#666;line-height:1.4;margin-bottom:5px;}
+.qg{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.qc{padding:9px;border-radius:6px;font-size:11px;font-weight:600;text-align:center;line-height:1.3;}
+.insight{background:#E1F5EE;border-radius:8px;padding:11px 14px;}
+.insight p{font-size:12px;color:#085041;line-height:1.6;}
+.warn{background:#FAECE7;border-radius:8px;padding:11px 14px;}
+.warn p{font-size:12px;color:#712B13;line-height:1.6;}
+.amber{background:#FAEEDA;border-radius:8px;padding:11px 14px;}
+.amber p{font-size:12px;color:#633806;line-height:1.6;}
+.est{font-size:9px;padding:1px 5px;border-radius:2px;background:#F1EFE8;color:#999;font-weight:600;margin-left:3px;vertical-align:middle;}
+.flag{background:#FAECE7;border:1px solid #F5C4B3;border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start;}
+.flag-icon{width:20px;height:20px;border-radius:50%;background:#D85A30;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;margin-top:1px;}
+.flag-text{font-size:12px;color:#712B13;line-height:1.5;flex:1;}
+.status-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0;}
+.nts-score-badge{display:inline-flex;align-items:center;gap:6px;background:#E1F5EE;border:1px solid #9FE1CB;border-radius:6px;padding:4px 10px;font-size:12px;color:#085041;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div class="brand">Need to <span>Know</span></div>
+  <div class="topbar-sep"></div>
+  <div class="topbar-label">Supplier battle card</div>
+  <div class="topbar-sep"></div>
+  <div class="topbar-name">CBRE</div>
+</div>
+
+<div class="page">
+
+  <!-- Source note -->
+  <div style="padding:8px 14px;border-radius:6px;background:white;border:1px solid #E0DED8;margin-bottom:12px;font-size:12px;color:#666;line-height:1.5;">
+    Sources: NTS Lite assessment (high confidence) · CBRE 2023 Corporate Responsibility Report · SBTi target dashboard (ID: 40005539) · ESGBook public disclosure. Items marked <span class="est">est.</span> are estimated where data is not directly available.
+  </div>
+
+  <!-- Deep review flag -->
+  <div class="flag">
+    <div class="flag-icon">!</div>
+    <div class="flag-text"><strong>Flagged for deep review.</strong> Two issues require verification: (1) CBRE has Scope 3 targets, but the near-term commitment is intensity-based and covers buildings managed for clients only — embodied carbon in construction materials (the dominant exposure for capital works) is not in scope until the long-term 2040 absolute target. The NTS Lite −1pt Scope 3 penalty should be reviewed in light of the full target language. (2) The 47.3% YoY emissions reduction is exceptional and warrants verification of methodology and boundary changes before being accepted at face value.</div>
+  </div>
+
+  <!-- SBTi target language -->
+  <div style="background:white;border:1px solid #9FE1CB;border-radius:10px;padding:14px 18px;margin-bottom:14px;">
+    <div class="section-label" style="margin-bottom:12px;">SBTi validated target language — CBRE (ID: 40005539)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+
+      <div style="background:#F8F8F6;border-radius:8px;padding:12px 14px;border-left:3px solid #1D9E75;">
+        <div style="font-size:10px;font-weight:700;color:#0F6E56;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;">Overall net-zero target</div>
+        <div style="font-size:12px;color:#1A1A1A;line-height:1.6;font-style:italic;">"CBRE commits to reach net-zero greenhouse gas emissions across the value chain by FY2040."</div>
+        <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="badge" style="background:#E1F5EE;color:#085041;">Full value chain</span>
+          <span class="badge" style="background:#E1F5EE;color:#085041;">2040 target</span>
+        </div>
+      </div>
+
+      <div style="background:#F8F8F6;border-radius:8px;padding:12px 14px;border-left:3px solid #EF9F27;">
+        <div style="font-size:10px;font-weight:700;color:#854F0B;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;">Near-term targets — by FY2030</div>
+        <div style="font-size:12px;color:#1A1A1A;line-height:1.6;margin-bottom:6px;"><strong>Scope 1+2:</strong> Reduce absolute emissions 50% from FY2019 base year.</div>
+        <div style="font-size:12px;color:#1A1A1A;line-height:1.6;"><strong>Scope 3 (Cat 11):</strong> Reduce emissions 55% per square foot in buildings managed for clients from FY2019 base year.</div>
+        <div style="margin-top:8px;"><span class="badge" style="background:#FAEEDA;color:#633806;">S3 = intensity only · Cat 11</span></div>
+        <div style="font-size:11px;color:#D85A30;margin-top:6px;line-height:1.4;">Near-term Scope 3 covers managed buildings only. Embodied carbon in construction materials not included.</div>
+      </div>
+
+      <div style="background:#F8F8F6;border-radius:8px;padding:12px 14px;border-left:3px solid #1D9E75;">
+        <div style="font-size:10px;font-weight:700;color:#0F6E56;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;">Long-term targets — by FY2040</div>
+        <div style="font-size:12px;color:#1A1A1A;line-height:1.6;margin-bottom:6px;"><strong>Scope 1+2:</strong> Reduce absolute emissions 90% from FY2019 base year.</div>
+        <div style="font-size:12px;color:#1A1A1A;line-height:1.6;"><strong>Scope 3:</strong> Reduce absolute emissions 90% from FY2019 base year.</div>
+        <div style="margin-top:8px;"><span class="badge" style="background:#E1F5EE;color:#085041;">S3 absolute by 2040</span></div>
+        <div style="font-size:11px;color:#0F6E56;margin-top:6px;line-height:1.4;">Strong long-term commitment. The gap is in the near-term pathway to 2030.</div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:12px;padding:10px 14px;background:#FAEEDA;border-radius:7px;">
+      <div style="font-size:12px;color:#633806;line-height:1.6;"><strong>What this means for engagement:</strong> CBRE has a strong long-term Scope 3 commitment (absolute −90% by 2040) but the near-term Scope 3 target is intensity-based and limited to buildings managed for clients. For a capital works category, embodied carbon in construction materials is the critical gap. The commercial ask is not to set a Scope 3 target — it is to bring forward a credible near-term embodied carbon roadmap that bridges the 2030 intensity target and the 2040 absolute commitment.</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div style="display:flex;align-items:flex-start;gap:18px;padding:18px;background:white;border-radius:12px;margin-bottom:14px;border:1px solid #E0DED8;">
+    <div style="width:56px;height:56px;border-radius:12px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#085041;flex-shrink:0;">CB</div>
+    <div style="flex:1;">
+      <div style="font-size:20px;font-weight:700;color:#1A1A1A;">CBRE</div>
+      <div style="font-size:13px;color:#666;margin-top:3px;">Capital works & facilities management · Construction sector · UK corporate services</div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+        <span class="badge" style="background:#E1F5EE;color:#085041;">NTS 73 · Leading band</span>
+        <span class="badge" style="background:#E1F5EE;color:#085041;">SBTi 1.5°C + Net-Zero validated</span>
+        <span class="badge" style="background:#E1F5EE;color:#085041;">100% renewable electricity</span>
+        <span class="badge" style="background:#FAECE7;color:#712B13;">Scope 3 partial — near-term Cat 11 only</span>
+        <span class="badge" style="background:#FAECE7;color:#712B13;">No CDP disclosure</span>
+        <span class="badge" style="background:#FAEEDA;color:#633806;">47.3% YoY drop — verify methodology</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;">
+      <div style="width:70px;height:70px;border-radius:50%;border:3px solid #1D9E75;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <div style="font-size:24px;font-weight:700;color:#1D9E75;line-height:1;">73</div>
+        <div style="font-size:9px;color:#999;">NTS Lite</div>
+      </div>
+      <div style="font-size:11px;color:#999;text-align:right;">Band: Leading</div>
+    </div>
+  </div>
+
+  <!-- Scope 3 banner -->
+  <div style="background:white;border:1.5px solid #9FE1CB;border-radius:12px;padding:18px 20px;margin-bottom:14px;display:flex;gap:24px;align-items:flex-start;">
+    <div style="flex:1;">
+      <div style="font-size:10px;font-weight:700;color:#0F6E56;letter-spacing:.07em;text-transform:uppercase;margin-bottom:7px;">Your Scope 3 exposure — CBRE spend (Category 1)</div>
+      <div style="font-size:40px;font-weight:700;color:#0F6E56;line-height:1;margin-bottom:6px;">31,636 <span style="font-size:20px;font-weight:500;">tCO2e</span></div>
+      <div style="font-size:12px;color:#0F6E56;margin-bottom:6px;">Spend-based methodology · EEIO sector factor · Construction / capital works</div>
+      <div style="font-size:13px;color:#444;line-height:1.6;">This is the carbon footprint your organisation is attributing to CBRE under your Scope 3 Category 1 reporting. (It is calculated from your spend — not CBRE's self-reported figure.)</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;min-width:160px;">
+      <div class="mc"><div class="ml">Spend attributed</div><div style="font-size:14px;font-weight:600;color:#1A1A1A;">$205M</div><div class="ms">Capital works · UK</div></div>
+      <div class="mc"><div class="ml">Emissions rank</div><div style="font-size:14px;font-weight:600;color:#D85A30;">#3</div><div class="ms">Across supplier landscape</div></div>
+    </div>
+  </div>
+
+  <!-- Why it matters -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;">
+    <div class="card" style="margin-bottom:0;"><div style="font-size:13px;font-weight:600;margin-bottom:5px;">Why this number is likely understated</div><div style="font-size:12px;color:#666;line-height:1.6;">The 31,636t figure uses a sector-average EEIO factor. In construction, embodied carbon in materials and supply chain typically represents 80%+ of actual footprint. CBRE's own Scope 3 is not covered by their SBTi — the real number could be substantially higher.</div></div>
+    <div class="card" style="margin-bottom:0;"><div style="font-size:13px;font-weight:600;margin-bottom:5px;">The Scope 3 gap is the priority</div><div style="font-size:12px;color:#666;line-height:1.6;">CBRE's SBTi covers Scope 1 and 2 only. For a construction category manager, this means the materials supply chain — concrete, steel, glass — is entirely outside the target framework. That is where the commercial leverage should focus.</div></div>
+    <div class="card" style="margin-bottom:0;"><div style="font-size:13px;font-weight:600;margin-bottom:5px;">A supplier-specific factor changes the picture</div><div style="font-size:12px;color:#666;line-height:1.6;">CBRE's operational emissions (Scope 1+2) are strong and declining. If they provide a supplier-specific intensity factor anchored to verified operational data, your Category 1 attribution likely falls. The bigger prize is pushing Scope 3 coverage into the SBTi.</div></div>
+  </div>
+
+  <!-- Key metrics -->
+  <div class="g4">
+    <div class="mc"><div class="ml">Your Scope 3 (CBRE)</div><div class="mv" style="color:#0F6E56;">31,636t</div><div class="ms">CO2e · spend-based · rank #3</div></div>
+    <div class="mc"><div class="ml">NTS Lite score</div><div class="mv" style="color:#1D9E75;">73</div><div class="ms">Leading band · High confidence</div></div>
+    <div class="mc"><div class="ml">YoY emissions change</div><div class="mv" style="color:#1D9E75;">−47.3%</div><div class="ms">Verify methodology ⚠</div></div>
+    <div class="mc"><div class="ml">Renewable electricity</div><div class="mv" style="color:#1D9E75;">100%</div><div class="ms">RE Score 9/10 · Strong</div></div>
+  </div>
+
+  <!-- NTS matrix + components -->
+  <div class="cols2">
+
+    <!-- 2x2 matrix -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-label">NTS quadrant position — construction & FM sector peers</div>
+      <svg width="100%" viewBox="0 0 560 390" xmlns="http://www.w3.org/2000/svg">
+        <rect x="50" y="15" width="215" height="170" fill="#E1F5EE" opacity="0.7"/>
+        <rect x="265" y="15" width="215" height="170" fill="#E1F5EE" opacity="0.4"/>
+        <rect x="50" y="185" width="215" height="170" fill="#FAECE7" opacity="0.7"/>
+        <rect x="265" y="185" width="215" height="170" fill="#FAEEDA" opacity="0.7"/>
+        <text x="157" y="45" text-anchor="middle" font-size="12" font-weight="600" font-family="system-ui,sans-serif" fill="#085041">Ambitious but constrained</text>
+        <text x="157" y="59" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#0F6E56">High delivery · Strong headwinds</text>
+        <text x="372" y="45" text-anchor="middle" font-size="12" font-weight="600" font-family="system-ui,sans-serif" fill="#085041">Leading</text>
+        <text x="372" y="59" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#0F6E56">High delivery · Low tailwinds</text>
+        <text x="157" y="214" text-anchor="middle" font-size="12" font-weight="600" font-family="system-ui,sans-serif" fill="#712B13">At risk</text>
+        <text x="157" y="228" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#993C1D">Low delivery · Strong headwinds</text>
+        <text x="372" y="214" text-anchor="middle" font-size="12" font-weight="600" font-family="system-ui,sans-serif" fill="#633806">Coasting</text>
+        <text x="372" y="228" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#854F0B">Low delivery · Low tailwinds</text>
+        <line x1="265" y1="15" x2="265" y2="355" stroke="#ccc" stroke-width="1" stroke-dasharray="5 3"/>
+        <line x1="50" y1="185" x2="480" y2="185" stroke="#ccc" stroke-width="1" stroke-dasharray="5 3"/>
+        <rect x="50" y="15" width="430" height="340" fill="none" stroke="#E0DED8" stroke-width="0.5"/>
+        <text x="265" y="375" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#999">← Strong headwinds · Context · Low tailwinds →</text>
+        <text x="18" y="185" text-anchor="middle" font-size="10" font-family="system-ui,sans-serif" fill="#999" transform="rotate(-90 18 185)">← Low · Ambition &amp; delivery · High →</text>
+        <!-- Unlabelled peers -->
+        <!-- Leading (top right) -->
+        <circle cx="418" cy="52" r="9" fill="#B4B2A9" opacity="0.55"/>
+        <circle cx="448" cy="78" r="8" fill="#B4B2A9" opacity="0.5"/>
+        <circle cx="395" cy="95" r="7" fill="#B4B2A9" opacity="0.5"/>
+        <!-- Ambitious but constrained (top left) — construction peers with headwinds -->
+        <circle cx="108" cy="48" r="10" fill="#B4B2A9" opacity="0.55"/>
+        <circle cx="148" cy="72" r="8" fill="#B4B2A9" opacity="0.5"/>
+        <circle cx="82" cy="95" r="7" fill="#B4B2A9" opacity="0.45"/>
+        <circle cx="185" cy="110" r="7" fill="#B4B2A9" opacity="0.45"/>
+        <!-- Coasting (bottom right) -->
+        <circle cx="338" cy="258" r="8" fill="#B4B2A9" opacity="0.5"/>
+        <circle cx="420" cy="285" r="7" fill="#B4B2A9" opacity="0.45"/>
+        <!-- At risk (bottom left) -->
+        <circle cx="95" cy="262" r="8" fill="#B4B2A9" opacity="0.45"/>
+        <circle cx="145" cy="308" r="7" fill="#B4B2A9" opacity="0.4"/>
+        <circle cx="195" cy="278" r="6" fill="#B4B2A9" opacity="0.4"/>
+        <!-- CBRE — upper portion, slightly left of centre (moderate headwinds, high delivery) -->
+        <circle cx="295" cy="68" r="15" fill="#1D9E75" opacity="0.92" stroke="white" stroke-width="2"/>
+        <text x="315" y="62" font-size="12" font-weight="700" font-family="system-ui,sans-serif" fill="#085041">CBRE</text>
+        <text x="315" y="76" font-size="10" font-family="system-ui,sans-serif" fill="#0F6E56">NTS 73 · Leading</text>
+        <!-- Legend -->
+        <circle cx="60" cy="368" r="7" fill="#1D9E75"/>
+        <text x="73" y="372" font-size="10" font-family="system-ui,sans-serif" fill="#085041">CBRE (NTS 73 · Leading band)</text>
+        <circle cx="260" cy="368" r="7" fill="#B4B2A9" opacity="0.55"/>
+        <text x="273" y="372" font-size="10" font-family="system-ui,sans-serif" fill="#666">Sector peers — unlabelled</text>
+      </svg>
+      <div style="font-size:11px;color:#999;margin-top:6px;line-height:1.4;">CBRE sits in the upper band — high ambition and strong delivery — with moderate construction headwinds placing them between Leading and Ambitious but constrained. Peer positions estimated from public SBTi, CDP, and ESGBook data.</div>
+    </div>
+
+    <!-- NTS components + calculation -->
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-label">NTS Lite components <em style="font-size:10px;color:#999;text-transform:none;letter-spacing:0;">from NTS Lite assessment · high confidence</em></div>
+
+      <div class="prog-row">
+        <div class="prog-label">Ambition</div>
+        <div class="prog-wrap"><div class="prog-fill" style="width:70%;background:#1D9E75;"></div></div>
+        <div class="prog-val" style="color:#1D9E75;">7</div>
+        <div class="prog-note">SBTi 1.5°C + Net-Zero. −1pt: Scope 3 gap</div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-label">Progress</div>
+        <div class="prog-wrap"><div class="prog-fill" style="width:85%;background:#1D9E75;"></div></div>
+        <div class="prog-val" style="color:#1D9E75;">8.5</div>
+        <div class="prog-note">−47.3% YoY — verify ⚠</div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-label">Context / H&T</div>
+        <div class="prog-wrap"><div class="prog-fill" style="width:44%;background:#EF9F27;"></div></div>
+        <div class="prog-val" style="color:#EF9F27;">4.4</div>
+        <div class="prog-note">Moderate headwinds</div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-label">Renewable energy</div>
+        <div class="prog-wrap"><div class="prog-fill" style="width:90%;background:#1D9E75;"></div></div>
+        <div class="prog-val" style="color:#1D9E75;">9</div>
+        <div class="prog-note">100% RE · strong execution</div>
+      </div>
+      <div class="prog-row" style="margin-bottom:6px;">
+        <div class="prog-label">Actionability</div>
+        <div class="prog-wrap"><div class="prog-fill" style="width:70%;background:#1D9E75;"></div></div>
+        <div class="prog-val" style="color:#1D9E75;">7</div>
+        <div class="prog-note">ESGBook public plan. No TPI data.</div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:#E1F5EE;border-radius:6px;margin-bottom:14px;">
+        <div style="font-size:13px;font-weight:700;color:#085041;">NTS Lite: 73 · Leading band</div>
+        <div style="font-size:11px;color:#0F6E56;margin-left:auto;">Emissions rank #3 · $205M spend</div>
+      </div>
+
+      <div style="border-top:1px solid #E0DED8;padding-top:13px;">
+        <div class="section-label">Carbon intensity — data sources & workings</div>
+        <table style="width:100%;font-size:12px;border-collapse:collapse;">
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Your Scope 3 attribution</td><td style="padding:5px 0;font-weight:600;color:#0F6E56;">31,636 tCO2e</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">Spend × EEIO construction factor</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Spend attributed</td><td style="padding:5px 0;font-weight:600;">$205M</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">NTS Lite input data</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Implied intensity (spend-based)</td><td style="padding:5px 0;font-weight:600;">~154 tCO2e/$M</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">31,636 ÷ 205 — EEIO, not operational</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">CBRE YoY Scope 1+2 reduction</td><td style="padding:5px 0;font-weight:600;color:#1D9E75;">−47.3%</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">CBRE CR Report 2023 — verify boundary</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Renewable electricity</td><td style="padding:5px 0;font-weight:600;color:#1D9E75;">100%</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">CBRE CR Report 2023 — verified</td></tr>
+          <tr style="border-bottom:1px solid #F1EFE8;"><td style="padding:5px 0;color:#666;">Scope 3 (supply chain)</td><td style="padding:5px 0;font-weight:600;color:#EF9F27;">Partially covered</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">Near-term: Cat 11 intensity only. Long-term: absolute −90% by 2040.</td></tr>
+          <tr><td style="padding:5px 0;color:#666;">CDP disclosure</td><td style="padding:5px 0;font-weight:600;color:#D85A30;">Not disclosed</td><td style="padding:5px 0;font-size:10px;color:#999;text-align:right;">NTS Lite assessment</td></tr>
+        </table>
+        <div style="font-size:11px;color:#999;margin-top:8px;line-height:1.5;font-style:italic;">The 31,636t spend-based figure uses a construction EEIO factor and does not capture CBRE's actual operational intensity. For a capital works category, the most material emissions are in the supply chain (embodied carbon in materials) — not captured in Scope 1+2 data.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carbon intensity benchmark -->
+  <div class="card">
+    <div class="section-label">Carbon intensity — operational benchmark vs construction sector (tCO2e per £m revenue)</div>
+    <div style="font-size:12px;color:#666;margin-bottom:14px;line-height:1.5;">For construction and FM, carbon intensity is typically expressed as tCO2e per £m turnover rather than per FTE. CBRE's operational Scope 1+2 intensity is strong — the benchmark gap sits in Scope 3 supply chain, not operations.</div>
+
+    <div style="position:relative;margin-top:32px;margin-bottom:56px;">
+      <div style="height:30px;border-radius:7px;overflow:hidden;position:relative;">
+        <div style="position:absolute;left:0;width:25%;height:100%;background:#FAECE7;"></div>
+        <div style="position:absolute;left:25%;width:30%;height:100%;background:#FAEEDA;"></div>
+        <div style="position:absolute;left:55%;width:38%;height:100%;background:#E1F5EE;"></div>
+        <div style="position:absolute;left:93%;width:7%;height:100%;background:#085041;"></div>
+        <div style="position:absolute;left:55%;top:0;width:2.5px;height:100%;background:#0F6E56;z-index:2;"></div>
+      </div>
+      <!-- Good threshold -->
+      <div style="position:absolute;left:55%;top:-26px;transform:translateX(-50%);font-size:11px;background:#0F6E56;color:white;padding:2px 9px;border-radius:3px;white-space:nowrap;font-weight:700;">Good threshold: ~18 tCO2e/£m</div>
+      <!-- Sector avg -->
+      <div style="position:absolute;left:42%;top:-26px;transform:translateX(-50%);text-align:center;">
+        <div style="font-size:10px;color:#999;white-space:nowrap;">Sector avg ~28</div>
+        <div style="width:1px;height:36px;background:#ccc;margin:0 auto;"></div>
+      </div>
+      <!-- CBRE dot — in good zone, operational Scope 1+2 strong -->
+      <div style="position:absolute;left:65%;top:50%;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:#1D9E75;border:3px solid white;box-shadow:0 0 0 1.5px #1D9E75;z-index:3;"></div>
+      <div style="position:absolute;left:65%;top:34px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;">
+        <div style="width:1.5px;height:9px;background:#1D9E75;"></div>
+        <div style="font-size:11px;font-weight:700;color:#085041;white-space:nowrap;background:#E1F5EE;padding:2px 8px;border-radius:3px;border:1px solid #9FE1CB;">CBRE Scope 1+2 ~12<span class="est">est.</span></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:9px;">
+        <span style="font-size:11px;color:#D85A30;font-weight:600;">Worst: ~80 tCO2e/£m</span>
+        <span style="font-size:11px;color:#085041;font-weight:600;">Best in class: ~5 tCO2e/£m (Scope 1+2)</span>
+      </div>
+    </div>
+
+    <!-- Zone legend -->
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:16px;">
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:11px;height:11px;border-radius:2px;background:#FAECE7;border:1px solid #D85A30;display:inline-block;"></span>Needs work (&gt;40)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:11px;height:11px;border-radius:2px;background:#FAEEDA;border:1px solid #EF9F27;display:inline-block;"></span>Developing (18–40)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:11px;height:11px;border-radius:2px;background:#E1F5EE;border:1px solid #1D9E75;display:inline-block;"></span>Good (≤18)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;"><span style="width:11px;height:11px;border-radius:2px;background:#085041;display:inline-block;"></span>Best in class (≤5)</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#666;margin-left:auto;"><span style="width:16px;height:2.5px;background:#0F6E56;display:inline-block;border-radius:1px;"></span>Good threshold</span>
+    </div>
+
+    <!-- Peer rows -->
+    <div style="border-top:1px solid #E0DED8;padding-top:14px;">
+      <div class="section-label">Peer comparison — construction & FM (unlabelled) · Scope 1+2 only</div>
+
+      <div class="peer-row">
+        <div style="width:9px;height:9px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></div>
+        <div class="peer-name">Peer A — leading</div>
+        <div class="peer-bar-wrap"><div class="peer-bar" style="width:8%;background:#1D9E75;"></div></div>
+        <div class="peer-val" style="color:#1D9E75;">~5 tCO2e/£m</div>
+        <span class="badge" style="background:#E1F5EE;color:#085041;min-width:80px;text-align:center;">Best in class</span>
+      </div>
+
+      <div class="peer-row" style="padding:5px 9px;border-radius:7px;background:#E1F5EE;border:1px solid #9FE1CB;">
+        <div style="width:9px;height:9px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></div>
+        <div class="peer-name" style="font-weight:700;color:#085041;">CBRE <span class="est">est. Scope 1+2</span></div>
+        <div class="peer-bar-wrap" style="background:#9FE1CB;"><div class="peer-bar" style="width:15%;background:#1D9E75;"></div></div>
+        <div class="peer-val" style="color:#1D9E75;font-weight:700;">~12 tCO2e/£m</div>
+        <span class="badge" style="background:#E1F5EE;color:#085041;min-width:80px;text-align:center;">Good</span>
+      </div>
+
+      <div class="peer-row">
+        <div style="width:9px;height:9px;border-radius:50%;background:#EF9F27;flex-shrink:0;"></div>
+        <div class="peer-name">Peer B — sector average</div>
+        <div class="peer-bar-wrap"><div class="peer-bar" style="width:35%;background:#EF9F27;"></div></div>
+        <div class="peer-val" style="color:#EF9F27;">~28 tCO2e/£m</div>
+        <span class="badge" style="background:#FAEEDA;color:#633806;min-width:80px;text-align:center;">Developing</span>
+      </div>
+
+      <div class="peer-row">
+        <div style="width:9px;height:9px;border-radius:50%;background:#D85A30;flex-shrink:0;"></div>
+        <div class="peer-name">Peer C — laggard</div>
+        <div class="peer-bar-wrap"><div class="peer-bar" style="width:60%;background:#D85A30;"></div></div>
+        <div class="peer-val" style="color:#D85A30;">~48 tCO2e/£m</div>
+        <span class="badge" style="background:#FAECE7;color:#712B13;min-width:80px;text-align:center;">At risk</span>
+      </div>
+
+      <div class="warn" style="margin-top:12px;">
+        <p><strong>Important caveat:</strong> This benchmark covers Scope 1+2 operational emissions only. For capital works, embodied carbon in construction materials (concrete, steel, glass) typically represents 70–85% of total lifecycle emissions. CBRE's strong Scope 1+2 position does not address this. A Scope 3 supply chain framework is the critical next step — and the main commercial ask.</p>
+      </div>
+      <div style="font-size:11px;color:#999;margin-top:8px;font-style:italic;">Peer intensities estimated from public sustainability reports and CDP disclosures. Unlabelled to preserve confidentiality. All figures Scope 1+2 only — Scope 3 excluded across the board due to inconsistent reporting.</div>
+    </div>
+  </div>
+
+  <!-- Initiatives -->
+  <div class="card">
+    <div class="section-label">Sustainability initiatives and programmes</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;" id="cbre-inits"></div>
+    <div style="padding-top:12px;border-top:1px solid #E0DED8;">
+      <div style="font-size:13px;font-weight:600;color:#1A1A1A;margin-bottom:8px;">Key gaps with direct NTS and Scope 3 impact</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span class="badge" style="background:#FAECE7;color:#712B13;">No near-term absolute Scope 3 target — embodied carbon not covered until 2040 long-term commitment</span>
+        <span class="badge" style="background:#FAECE7;color:#712B13;">No CDP disclosure — limits data anchor across all NTS components</span>
+        <span class="badge" style="background:#FAEEDA;color:#633806;">47.3% YoY reduction — verify methodology and boundary changes</span>
+        <span class="badge" style="background:#FAEEDA;color:#633806;">No TPI assessment — Actionability component partially estimated</span>
+        <span class="badge" style="background:#FAEEDA;color:#633806;">RE100 not joined — 100% RE achieved operationally; formalise to remove estimation discount</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Engagement + Actions -->
+  <div class="cols2">
+
+    <div class="card" style="margin-bottom:0;border-color:#9FE1CB;border-width:1.5px;">
+      <div class="section-label" style="color:#085041;">Engagement framing</div>
+      <div style="font-size:13px;font-weight:600;margin-bottom:7px;">Strengths to acknowledge</div>
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px;">
+        <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#1D9E75;flex-shrink:0;font-size:14px;">✓</span>SBTi 1.5°C aligned and Net-Zero validated — strong ambition anchor</div>
+        <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#1D9E75;flex-shrink:0;font-size:14px;">✓</span>100% renewable electricity — RE score 9/10, operational execution is strong</div>
+        <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#1D9E75;flex-shrink:0;font-size:14px;">✓</span>47.3% YoY emissions reduction — if verified, exceptional delivery trajectory</div>
+        <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#1D9E75;flex-shrink:0;font-size:14px;">✓</span>Public ESG transition plan — credibility baseline confirmed via ESGBook</div>
+        <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#1D9E75;flex-shrink:0;font-size:14px;">✓</span>NTS 73 — highest-scoring supplier in this category. Leading by the data.</div>
+      </div>
+      <div style="border-top:1px solid #E0DED8;padding-top:12px;">
+        <div style="font-size:13px;font-weight:600;margin-bottom:7px;">The critical challenges</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#D85A30;flex-shrink:0;">▲</span>Near-term Scope 3 target is intensity-based and limited to managed buildings — embodied carbon in construction materials not covered until the 2040 absolute target. Strong long-term commitment; weak near-term pathway for capital works.</div>
+          <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#D85A30;flex-shrink:0;">▲</span>47.3% YoY drop needs explanation — likely reflects a methodology or boundary change. Verify before crediting in commercial structures.</div>
+          <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#D85A30;flex-shrink:0;">▲</span>No CDP disclosure — NTS data quality anchors missing despite high confidence rating. Without CDP, RE and Progress components remain partially estimated.</div>
+          <div style="display:flex;gap:8px;font-size:13px;color:#444;"><span style="color:#D85A30;flex-shrink:0;">▲</span>No TPI assessment — Actionability component partially estimated from ESGBook only.</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #E0DED8;">
+        <div style="font-size:13px;font-weight:600;margin-bottom:7px;">NTS quadrant position</div>
+        <div class="qg">
+          <div class="qc" style="background:#E1F5EE;color:#085041;opacity:0.5;">Ambitious but constrained</div>
+          <div class="qc" style="background:#E1F5EE;color:#085041;border:2px solid #1D9E75;">Leading ←</div>
+          <div class="qc" style="background:#F1EFE8;color:#999;opacity:0.4;">At risk</div>
+          <div class="qc" style="background:#F1EFE8;color:#999;opacity:0.4;">Coasting</div>
+        </div>
+        <div style="font-size:12px;color:#666;margin-top:8px;line-height:1.5;">High delivery against moderate headwinds. Construction context score (4.4) means they are not in pure Leading — but their NTS 73 puts them at the top of the peer landscape. The Scope 3 gap is the performance risk, not the operational delivery.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="section-label">Recommended actions</div>
+      <div class="action-row"><div class="action-num">1</div><div><div class="action-text">Require verification of the 47.3% YoY emissions reduction — request full methodology note, boundary definition, and base year rationale. A decline of this scale in one year almost always reflects a scope or methodology change rather than pure operational improvement.</div><div class="action-due">Before contract signature — gate on verification</div></div></div>
+      <div class="action-row"><div class="action-num">2</div><div><div class="action-text">Require a near-term embodied carbon reduction roadmap as a contract deliverable — CBRE has a strong 2040 Scope 3 absolute target, but the near-term Scope 3 commitment covers buildings managed for clients only. For capital works, the dominant exposure is embodied carbon in materials (concrete, steel, glass). The commercial ask is a supplier engagement programme covering CBRE's construction supply chain with defined near-term milestones that bridge to the 2040 commitment.</div><div class="action-due">Year 1 — milestone-gated</div></div></div>
+      <div class="action-row"><div class="action-num">3</div><div><div class="action-text">Require CDP disclosure at Band C+ — currently no disclosure. Without it, NTS components remain partially estimated and your Scope 3 attribution is anchored to a sector average, not CBRE's actual performance.</div><div class="action-due">Within 90 days of signature</div></div></div>
+      <div class="action-row"><div class="action-num">4</div><div><div class="action-text">Accelerate the near-term Scope 3 pathway — CBRE has a 2040 absolute Scope 3 target which is credible, but the 2030 Scope 3 commitment is intensity-based and limited to managed buildings. The commercial ask is a concrete near-term milestone (e.g. 2027) for embodied carbon in capital works — not a new SBTi target, but a project-level commitment that sits between the 2030 and 2040 targets and gives the category manager something measurable in-contract.</div><div class="action-due">Year 2 commitment — milestone payment on delivery</div></div></div>
+      <div class="action-row"><div class="action-num">5</div><div><div class="action-text">Formalise RE100 membership — 100% renewable electricity already achieved. RE100 membership adds independent verification and removes the estimation from the RE NTS component. Low effort, high signal.</div><div class="action-due">Year 1 — no implementation barrier</div></div></div>
+      <div class="action-row"><div class="action-num" style="background:#E0DED8;color:#666;">6</div><div><div class="action-text" style="color:#999;">If CDP disclosure and verified emissions data confirms actual Scope 1+2 intensity below EEIO sector average — update the 31,636t Scope 3 attribution and release carbon-linked price adjustment accordingly.</div><div class="action-due">Contingent on data delivery</div></div></div>
+    </div>
+
+  </div>
+
+  <!-- Data status -->
+  <div class="card" style="margin-top:14px;">
+    <div class="section-label">Data status</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#1D9E75;"></span>SBTi 1.5°C + Net-Zero — validated (ID: 40005539)</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#1D9E75;"></span>100% renewable electricity — verified</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#1D9E75;"></span>Public ESG transition plan — confirmed ESGBook</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#0F6E56;"></span>Your Scope 3 — 31,636t spend-based</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#EF9F27;"></span>47.3% YoY reduction — unverified, requires methodology review</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#D85A30;"></span>Scope 3 — not covered by SBTi · critical gap</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#D85A30;"></span>CDP — not disclosed</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#888;"></span>TPI assessment — not available (not in TPI coverage)</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#888;"></span>RE100 — not joined (100% RE already achieved operationally)</span>
+      <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;"><span class="status-dot" style="background:#888;"></span>Supplier-specific emission factor — not provided</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const inits=[
+  {icon:'S',bg:'#E1F5EE',ic:'#085041',bc:'#9FE1CB',name:'SBTi',txt:'1.5°C + Net-Zero validated (ID: 40005539). Near-term: Scope 1+2 −50% and Scope 3 Cat 11 −55% intensity by FY2030. Long-term: Scope 1+2 −90% and Scope 3 −90% absolute by FY2040. Near-term Scope 3 covers managed buildings only — embodied carbon in construction materials is the near-term gap. −1pt NTS penalty applied; review warranted.',badge:'Near-term S3 limited · strong 2040 commitment',bf:'#FAEEDA',bfc:'#633806'},
+  {icon:'C',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'CDP',txt:'Not disclosed. No standalone CDP submission identified. This is a significant gap — without CDP data, RE score and Progress components remain estimated. Band C+ required as a contract condition.',badge:'Not disclosed',bf:'#FAECE7',bfc:'#712B13'},
+  {icon:'RE',bg:'#E1F5EE',ic:'#085041',bc:'#9FE1CB',name:'Renewable energy',txt:'100% renewable electricity sourced. RE Score 9/10 — Strong band. UK market offers excellent PPA access. RE100 not joined despite full achievement — formalising would remove the estimation discount.',badge:'100% RE · not RE100',bf:'#E1F5EE',bfc:'#085041'},
+  {icon:'E',bg:'#E1F5EE',ic:'#085041',bc:'#9FE1CB',name:'ESG Trans. Plan',txt:'Public ESG transition plan confirmed via ESGBook. 1.5°C aligned plan publicly accessible. This anchors the Actionability component in the absence of TPI data.',badge:'Public plan confirmed',bf:'#E1F5EE',bfc:'#085041'},
+  {icon:'T',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'TPI',txt:'Not assessed — CBRE not in TPI coverage universe (typically covers large listed companies). Actionability score relies on ESGBook and public disclosure instead. Baseline credibility confirmed.',badge:'Not in TPI coverage',bf:'#F1EFE8',bfc:'#5F5E5A'},
+  {icon:'G',bg:'#FAEEDA',ic:'#633806',bc:'#FAC775',name:'GHG Protocol',txt:'Scope 1+2 inventory in place — confirmed via CR Report and SBTi submission. Scope 3 reported partially but not included in SBTi. For construction, embodied carbon (Cat 11/12) is the critical exclusion.',badge:'Scope 1+2 only in SBTi',bf:'#FAEEDA',bfc:'#633806'},
+  {icon:'R',bg:'#F1EFE8',ic:'#5F5E5A',bc:'#D3D1C7',name:'RE100',txt:'Not a member. 100% renewable electricity already achieved operationally — RE100 membership would formalise this and anchor the RE NTS component to a verified standard rather than self-reported data.',badge:'Not joined',bf:'#FAEEDA',bfc:'#633806'},
+  {icon:'N',bg:'#E1F5EE',ic:'#085041',bc:'#9FE1CB',name:'Net-Zero target',txt:'Net-Zero target validated by SBTi alongside the 1.5°C near-term target. Strong long-term commitment. However, Net-Zero validation that excludes Scope 3 has limited credibility for a construction supplier.',badge:'Validated — Scope 3 excluded',bf:'#FAEEDA',bfc:'#633806'},
+];
+document.getElementById('cbre-inits').innerHTML=inits.map(i=>`
+  <div style="border:1px solid ${i.bc};border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:4px;background:white;">
+    <div style="width:30px;height:30px;border-radius:6px;background:${i.bg};color:${i.ic};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-bottom:5px;">${i.icon}</div>
+    <div style="font-size:12px;font-weight:700;color:#1A1A1A;">${i.name}</div>
+    <div style="font-size:11px;color:#666;line-height:1.5;margin-bottom:6px;">${i.txt}</div>
+    <span style="font-size:10px;padding:2px 7px;border-radius:3px;font-weight:700;background:${i.bf};color:${i.bfc};align-self:flex-start;">${i.badge}</span>
+  </div>`).join('');
+</script>
+</body>
+</html>
